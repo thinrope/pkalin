@@ -69,6 +69,8 @@ src_configure() {
 		"-DQGIS_PLUGIN_SUBDIR=$(get_libdir)/qgis"
 		"-DWITH_INTERNAL_SPATIALITE=OFF"
 		"-DWITH_INTERNAL_QWTPOLAR=OFF"
+		"-DQWT_INCLUDE_DIR=/usr/include/qwt6"
+		"-DQWT_LIBRARY=/usr/lib/libqwt6.so"
 		"-DPEDANTIC=OFF"
 		"-DWITH_APIDOC=OFF"
 		$(cmake-utils_use_with postgres POSTGRESQL)
