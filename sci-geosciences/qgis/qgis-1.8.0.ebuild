@@ -29,9 +29,9 @@ RDEPEND="
 	x11-libs/qt-svg:4
 	x11-libs/qt-sql:4
 	x11-libs/qt-webkit:4
-	x11-libs/qwt[svg]
-	x11-libs/qwtpolar
-	grass? ( >=sci-geosciences/grass-6.4.0_rc6[python?] )
+	x11-libs/qwt:6[svg]
+	>=x11-libs/qwtpolar-1.0.0
+	grass? ( >=sci-geosciences/grass-6.4.1[python?] )
 	postgres? ( >=dev-db/postgresql-base-8.4 )
 	python? (
 		dev-python/PyQt4[X,sql,svg]
