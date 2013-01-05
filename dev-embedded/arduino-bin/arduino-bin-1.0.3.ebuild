@@ -16,7 +16,8 @@ KEYWORDS="~amd64"
 RESTRICT="strip binchecks"
 IUSE=""
 
-RDEPEND=">=virtual/jre-1.5"
+RDEPEND="!!dev-embedded/arduino
+>=virtual/jre-1.5"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/arduino-${PV}"
@@ -29,19 +30,21 @@ src_install() {
 	exeinto "/usr/bin"
 	doexe arduino
 
-	insinto "/usr/share/arduino-${PV}/"
+	ARD="/usr/share/arduino-${PV}"
+	insinto "${ARD}"
 	doins -r hardware
-	fperms 0755 /usr/share/arduino-${PV}/hardware/tools/avr/lib/gcc/avr/4.3.2/c*
-	fperms -R 0755 /usr/share/arduino-${PV}/hardware/tools/avr/bin/
-	fperms -R 0755 /usr/share/arduino-${PV}/hardware/tools/avr/bin.gcc/
-	fperms 0755 /usr/share/arduino-${PV}/hardware/tools/avrdude{,64}
+	fperms 0755 ${ARD}/hardware/tools/avr/lib/gcc/avr/4.3.2/cc1{,plus}
+	fperms 0755 ${ARD}/hardware/tools/avr/lib/gcc/avr/4.3.2/collect2
+	fperms -R 0755 ${ARD}/hardware/tools/avr/bin/
+	fperms -R 0755 ${ARD}/hardware/tools/avr/bin.gcc/
+	fperms 0755 ${ARD}/hardware/tools/avrdude{,64}
 	# use system avrdude
-	#dosym /usr/bin/avrdude "/usr/share/arduino-${PV}/hardware/tools/avrdude"
-	#dosym /etc/avrdude.conf "/usr/share/arduino-${PV}/hardware/tools/avrdude.conf"
+	#dosym /usr/bin/avrdude "${ARD}/hardware/tools/avrdude"
+	#dosym /etc/avrdude.conf "${ARD}/hardware/tools/avrdude.conf"
 
-	insinto "/usr/share/arduino-${PV}/"
+	insinto "${ARD}"
 	doins -r libraries lib
-	fowners -R root:uucp "/usr/share/arduino-${PV}/hardware"
+	fowners -R root:uucp "${ARD}/hardware"
 
 }
 
