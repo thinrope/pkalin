@@ -36,13 +36,16 @@ java_prepare() {
 	rm build/linux/dist/tools/avrdude* || die
 	rm build/linux/dist/lib/* || die
 	rm app/lib/* || die
-	rm app/pde.jar || die
 	# Patch build/build.xml - remove local jar files
 	# for rxtx and ecj (use system wide versions)
 	epatch "${FILESDIR}"/${P}-build.xml.patch
 
 	# Patch launcher script to include rxtx class/ld paths
 	epatch "${FILESDIR}"/${P}-script.patch
+	
+	# remove other platforms code
+	rm app/src/processing/app/macosx/* || die
+	rm app/src/processing/app/windows/* || die
 }
 
 src_compile() {
