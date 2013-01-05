@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
+EAPI="2"
 
-inherit eutils git-2
+inherit git-2
 
 DESCRIPTION="Nifty scrips for gentoo taht go under /usr/local/{,s}bin"
 HOMEPAGE="https://github.com/thinrope/gentoo-nifty-scripts"
@@ -16,9 +16,13 @@ SLOT="0"
 IUSE=""
 KEYWORDS=""
 
-DEPEND=""
+DEPEND="dev-vcs/git"
 RDEPEND="${DEPEND}
-	dev-vcs/git"
+	app-portage/eix
+	app-portage/demerge
+	app-admin/perl-cleaner
+	app-admin/python-updater
+	app-portage/gentoolkit"
 
 S=${WORKDIR}/${PN}
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd />
+	<natural-name />
+	<longdescription />
+	<use />
+	<maintainer>
+		<email>kalin@thinrope.net</email>
+		<name>Kalin KOZHUHAROV</name>
+	</maintainer>
+	<upstream>
+		<bugs-to>https://github.com/thinrope/gentoo-nifty-scripts/issues</bugs-to>
+	</upstream>
+</pkgmetadata>
