@@ -4,7 +4,7 @@
  #!/bin/sh
   
 -APPDIR="$(dirname -- "$(readlink -f -- "${0}")" )"
-+APPDIR="/usr/share/arduino-1.0.3"
++APPDIR="/usr/share/arduino"
  
  cd "$APPDIR"
   
