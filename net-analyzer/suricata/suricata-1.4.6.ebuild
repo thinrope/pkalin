@@ -13,7 +13,7 @@ SRC_URI="http://openinfosecfoundation.org/download/${P/_/}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="debug profiling profiling-locks unix-socket prelude nfqueue pfring af-packet dag napatech luajit geoip static-libs"
+IUSE="debug profiling profiling-locks unix-socket prelude nfqueue +pfring af-packet dag napatech luajit geoip static-libs"
 
 DEPEND="
 	dev-libs/libpcre
@@ -24,8 +24,8 @@ DEPEND="
 	app-text/htp
 	prelude? (
 		dev-libs/libprelude
-		app-admin/prelude-manager
 		dev-libs/libpreludedb
+		app-admin/prelude-manager
 		app-admin/prelude-lml
 	)
 	nfqueue? (
