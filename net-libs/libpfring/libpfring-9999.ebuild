@@ -18,7 +18,8 @@ KEYWORDS="~amd64"
 IUSE="rdi bpf static-libs"
 
 DEPEND="sys-kernel/linux-headers
-"
+	net-analyzer/pf_ring-kmod"
+RDEPEND="${DEPEND}"
 
 CONFIG_CHECK="NET"
 ERROR_NET="PF_RING requires CONFIG_NET=y set in the kernel."
