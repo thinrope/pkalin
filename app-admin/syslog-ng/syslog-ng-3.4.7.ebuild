@@ -13,7 +13,7 @@ SRC_URI="http://www.balabit.com/downloads/files/syslog-ng/sources/${MY_PV}/sourc
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="caps dbi geoip ipv6 json mongodb +pcre smtp spoof-source ssl systemd tcpd"
+IUSE="caps dbi geoip ipv6 json mongodb +pcre pacct smtp spoof-source ssl systemd tcpd"
 RESTRICT="test"
 
 RDEPEND="
@@ -51,6 +51,7 @@ src_configure() {
 		$(use_enable json) \
 		$(use_enable mongodb) \
 		$(use_enable pcre) \
+		$(use_enable pacct) \
 		$(use_enable smtp) \
 		$(use_enable spoof-source) \
 		$(use_enable dbi sql) \
