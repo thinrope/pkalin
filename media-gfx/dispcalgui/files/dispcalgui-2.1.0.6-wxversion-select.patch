@@ -1,0 +1,12 @@
+--- A/dispcalGUI/main.py	2014-06-10 13:50:33.625388278 +0900
++++ B/dispcalGUI/main.py	2014-06-10 13:50:44.825397096 +0900
+@@ -18,6 +18,9 @@
+ 					   (".".join(str(n) for n in py_minversion),
+ 						".".join(str(n) for n in py_maxversion),
+ 					    sys.version.split()[0]))
++# Gentoo compatibility module
++import wxversion
++wxversion.select("2.8")
+ 
+ from config import (autostart_home, confighome, datahome, enc, exe, exe_ext,
+ 					exedir, exename, get_data_path,fs_enc, isapp, isexe,
