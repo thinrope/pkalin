@@ -80,7 +80,7 @@ FFMPEG_FLAG_MAP=(
 		zvbi:libzvbi
 		# libavfilter options
 		bs2b:libbs2b flite:libflite frei0r fribidi:libfribidi fontconfig ladspa
-		libass truetype:libfreetype
+		libass truetype:libfreetype libvidstab
 		# libswresample options
 		libsoxr
 		# Threads; we only support pthread for now but ffmpeg supports more
@@ -216,6 +216,7 @@ RDEPEND="
 	truetype? ( >=media-libs/freetype-2.5.0.1:2[${MULTILIB_USEDEP}] )
 	vaapi? ( >=x11-libs/libva-1.2.1-r1[${MULTILIB_USEDEP}] )
 	vdpau? ( >=x11-libs/libvdpau-0.7[${MULTILIB_USEDEP}] )
+	libvidstab? ( >=media-video/vidstab-0.98b )
 	vorbis? (
 		>=media-libs/libvorbis-1.3.3-r1[${MULTILIB_USEDEP}]
 		>=media-libs/libogg-1.3.0[${MULTILIB_USEDEP}]
