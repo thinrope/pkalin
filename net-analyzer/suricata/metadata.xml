@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <herd>netmon</herd>
+  <maintainer>
+    <email>maintainer-needed@gentoo.org</email>
+  </maintainer>
+  <use>
+	<flag name="debug">Enable Debug output.</flag>
+	<flag name="af-packet">Enable AF_PACKET support [default=yes]</flag>
+	<flag name="pfring">Enable Native PF_RING support by <pkg>net-libs/libpfring</pkg> for faster packet capture [default=yes]</flag>
+  </use>
+</pkgmetadata>
