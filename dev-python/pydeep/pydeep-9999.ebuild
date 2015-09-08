@@ -1,10 +1,11 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
+PYTHON_COMPAT=( python2_7 python3_4 )
 
-inherit distutils git-2
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Python bindings for ssdeep"
 HOMEPAGE="https://github.com/kbandla/pydeep"
@@ -14,20 +15,8 @@ LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND=">=dev-lang/python-2.5
-	app-forensics/ssdeep"
+DEPEND=">=app-crypt/ssdeep-2.8
+${PYTHON_DEPS}"
 RDEPEND="${DEPEND}"
-
-src_prepare() {
-	distutils_src_prepare
-}
-
-src_compile() {
-	distutils_src_compile
-	python setup.py build
-}
-
-src_install() {
-	distutils_src_install
-}
