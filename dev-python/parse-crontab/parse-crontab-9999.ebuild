@@ -11,7 +11,7 @@ DESCRIPTION="Python bindings for ssdeep"
 HOMEPAGE="https://github.com/josiahcarlson/parse-crontab"
 EGIT_REPO_URI="https://github.com/josiahcarlson/parse-crontab.git"
 
-LICENSE=""
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
