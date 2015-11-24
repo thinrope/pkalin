@@ -43,4 +43,5 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}/add_Gentoo_distro.patch"
+	epatch_user
 }
