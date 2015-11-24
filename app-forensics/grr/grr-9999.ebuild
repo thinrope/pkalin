@@ -39,3 +39,7 @@ DEPEND=">=app-forensics/sleuthkit-3.2.3
 	${PYTHON_DEPS}"
 
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	epatch "${FILESDIR}/add_Gentoo_distro.patch"
+}
