@@ -7,6 +7,7 @@ EAPI=5
 inherit linux-mod linux-info git-r3
 
 EGIT_REPO_URI="https://github.com/ntop/PF_RING.git"
+EGIT_COMMIT="HEAD"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
 S="${WORKDIR}/${PN}/kernel"
 
@@ -16,7 +17,7 @@ SRC_URI=""
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="sys-kernel/linux-headers"

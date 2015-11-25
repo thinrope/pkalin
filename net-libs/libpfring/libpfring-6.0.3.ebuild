@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils linux-info git-r3
 
 EGIT_REPO_URI="https://github.com/ntop/PF_RING.git"
-EGIT_COMMIT="HEAD"
+EGIT_COMMIT="d11496f8abe8c1fc1ab5d6f1bb23182c54ac4a89"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
 S="${WORKDIR}/${PN}/userland/lib"
 
@@ -17,7 +17,7 @@ SRC_URI=""
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="sys-kernel/linux-headers"
