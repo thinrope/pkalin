@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$ 
+# $Id$
 
 EAPI=5
 
@@ -17,7 +17,7 @@ S="${WORKDIR}/rekall/${PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
