@@ -16,14 +16,15 @@ SRC_URI="
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 
 CDEPEND="
 	dev-python/pyside[webkit,${PYTHON_USEDEP}]
 	app-crypt/libu2f-host
 	app-crypt/libykneomgr
-	sys-auth/ykpers"
+	sys-auth/ykpers
+	dev-python/pyside-tools"
 
 DEPEND="
 	dev-python/docutils[${PYTHON_USEDEP}]
@@ -43,8 +44,8 @@ python_test() {
 python_install_all() {
 	distutils-r1_python_install_all
 
-	doman scripts/neoman.1
+	doman man/neoman.1
 	domenu resources/neoman.desktop
 	doicon resources/neoman.xpm
-	newicon -s 128 resources/neoman-large.png neoman.png
+	newicon -s 128 resources/yubikey-neo-manager.png neoman.png
 }
