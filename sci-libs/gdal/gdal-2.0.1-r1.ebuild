@@ -58,12 +58,11 @@ RDEPEND="
 	xls? ( dev-libs/freexl )
 "
 
-SWIG_DEP=">=dev-lang/swig-2.0.2 <=dev-lang/swig-3.0.4"
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	java? ( >=virtual/jdk-1.6 )
-	perl? ( ${SWIG_DEP} )
-	python? ( ${SWIG_DEP} )"
+	perl? ( dev-lang/swig:0 )
+	python? ( dev-lang/swig:0 )"
 
 AT_M4DIR="${S}/m4"
 MAKEOPTS+=" -j1"
