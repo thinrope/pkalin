@@ -13,6 +13,7 @@ HOMEPAGE="https://github.com/scoder/acora"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/scoder/acora.git"
 EGIT_CHECKOUT_DIR="${WORKDIR}/acora"
+EGIT_COMMIT="HEAD"
 S="${WORKDIR}/${PN}"
 
 LICENSE="Apache-2.0"
@@ -21,5 +22,6 @@ KEYWORDS="~amd64"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND="${PYTHON_DEPS}
+>=dev-python/cython-0.22"
 RDEPEND="${DEPEND}"
