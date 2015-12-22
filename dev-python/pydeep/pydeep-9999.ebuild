@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/kbandla/pydeep.git"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

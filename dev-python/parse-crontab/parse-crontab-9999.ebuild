@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/josiahcarlson/parse-crontab.git"
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
