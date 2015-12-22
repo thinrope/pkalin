@@ -32,4 +32,5 @@ RDEPEND="${DEPEND}
 	>=dev-python/pyelftools-0.22
 	>=dev-libs/distorm64-3.3-r1
 	>=dev-python/acora-1.8
+	>=dev-python/pyaff4-0.19
 	=dev-python/dotty-0.0.1_pre20150804"
