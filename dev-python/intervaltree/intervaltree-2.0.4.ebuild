@@ -23,4 +23,5 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	>=dev-python/sortedcontainers-0.9.6"

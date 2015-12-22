@@ -13,6 +13,7 @@ HOMEPAGE="https://github.com/chaimleib/intervaltree"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/chaimleib/intervaltree.git"
 EGIT_CHECKOUT_DIR="${WORKDIR}/intervaltree"
+EGIT_COMMIT="HEAD"
 S="${WORKDIR}/${PN}"
 
 LICENSE="Apache-2.0"
@@ -22,4 +23,5 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	>=dev-python/sortedcontainers-0.9.6"
