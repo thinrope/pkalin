@@ -22,5 +22,8 @@ KEYWORDS=""
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}"
+DEPEND="${PYTHON_DEPS}
+	>=dev-python/rdflib-4.2.1
+	>=dev-python/intervaltree-2.1.0"
+RDEPEND="${DEPEND}
+	>=dev-python/sparql-wrapper-1.6.4"
