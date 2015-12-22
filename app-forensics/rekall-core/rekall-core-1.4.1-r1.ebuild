@@ -23,4 +23,13 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	>=dev-python/configargparse-0.9.3
+	>=dev-python/pyyaml-3.11
+	>=dev-python/pytz-2015.6
+	>=dev-python/intervaltree-2.0.4
+	>=dev-python/pycrypto-2.6.1
+	>=dev-python/pyelftools-0.22
+	>=dev-libs/distorm64-3.3-r1
+	>=dev-python/acora-1.8
+	=dev-python/dotty-0.0.1_pre20150804"
