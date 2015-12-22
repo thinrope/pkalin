@@ -13,11 +13,12 @@ HOMEPAGE="https://github.com/google/aff4"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/google/aff4.git"
 EGIT_CHECKOUT_DIR="${WORKDIR}/pyaff4"
+EGIT_COMMIT="HEAD"
 S="${WORKDIR}/pyaff4/${PN}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
