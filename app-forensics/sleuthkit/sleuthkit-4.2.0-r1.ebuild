@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -8,7 +8,7 @@ AUTOTOOLS_IN_SOURCE_BUILD=1
 
 inherit autotools-utils
 
-DESCRIPTION="A library and a collection of comand line tools for forensic analysis of disk images"
+DESCRIPTION="A collection of file system and media management forensic analysis tools"
 HOMEPAGE="http://www.sleuthkit.org/sleuthkit/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
@@ -21,7 +21,7 @@ DEPEND="dev-db/sqlite:3
 	ewf? ( app-forensics/libewf )
 	aff? ( app-forensics/afflib )"
 RDEPEND="${DEPEND}
-	dev-perl/DateManip"
+	dev-perl/Date-Manip"
 
 DOCS=( NEWS.txt README.md )
 
