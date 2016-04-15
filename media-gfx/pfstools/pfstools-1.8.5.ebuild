@@ -1,13 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="4"
+EAPI="5"
 
-inherit base multilib
+inherit multilib
 
-DESCRIPTION="${PN} package is a set of command line programs for reading,
-writing and manipulating HDR images"
+DESCRIPTION="A set of command line programs for reading, writing and manipulating HDR images"
 HOMEPAGE="http://pfstools.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 

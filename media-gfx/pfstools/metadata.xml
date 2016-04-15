@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer>
+    <email>maintainer-wanted@gentoo.org</email>
+  </maintainer>
+  <upstream>
+    <remote-id type="github">Steve132/pfstools</remote-id>
+  </upstream>
+  <use>
+    <flag name="octave">Enable <pkg>sci-mathematics/octave</pkg> support</flag>
+    <flag name="gdal">Enable <pkg>sci-lib/gdal</pkg> support</flag>
+    <flag name="netpbm">Enable <pkg>media-libs/netpbm</pkg> support</flag>
+  </use>
+</pkgmetadata>
