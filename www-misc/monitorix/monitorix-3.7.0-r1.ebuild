@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -13,7 +13,7 @@ SRC_URI="http://www.${PN}.org/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="apcupsd evms hddtemp httpd lm_sensors postfix"
+IUSE="apcupsd hddtemp httpd lm_sensors postfix"
 
 DEPEND="sys-apps/sed"
 RDEPEND="dev-perl/DBI
@@ -23,9 +23,8 @@ RDEPEND="dev-perl/DBI
 	dev-perl/MIME-Lite
 	dev-perl/XML-Simple
 	net-analyzer/rrdtool[perl]
-	virtual/perl-CGI
+	virtual/httpd-cgi
 	apcupsd? ( sys-power/apcupsd )
-	evms? ( sys-fs/evms )
 	hddtemp? ( app-admin/hddtemp )
 	httpd? ( virtual/httpd-cgi )
 	lm_sensors? ( sys-apps/lm_sensors )
