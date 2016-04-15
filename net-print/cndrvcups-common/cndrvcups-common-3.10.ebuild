@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
-inherit autotools multilib versionator
+inherit multilib versionator
 
 # NOTE: various versions of lb/common packages are packed together, hardcode!
 

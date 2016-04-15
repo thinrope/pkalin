@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 WX_GTK_VER="2.9"
 
-inherit base eutils wxwidgets
+inherit eutils wxwidgets
 
 DESCRIPTION="Cross platform IDE for the C/C++ programming languages"
 HOMEPAGE="http://www.codelite.org/"
@@ -19,7 +19,7 @@ IUSE="debug mysql pch postgres"
 
 DEPEND="debug? ( x11-libs/wxGTK:${WX_GTK_VER}[debug] )
 	mysql? ( virtual/mysql )
-	postgres? ( dev-db/postgresql-base )"
+	postgres? ( dev-db/postgresql )"
 RDEPEND="x11-libs/wxGTK:${WX_GTK_VER}[X]"
 
 PATCHES=(
