@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,15 +6,16 @@ EAPI=5
 
 inherit eutils
 
-DESCRIPTION="A free, closed-source PDF document viewer (not supported anymore)"
+DESCRIPTION="A free, closed-source PDF document viewer (not supported anymore, 32bit)"
 HOMEPAGE="http://www.foxitsoftware.com/products/pdf-reader/"
-SRC_URI="http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/linux/1.x/1.1/enu/${P}.tar.bz2"
+SRC_URI="http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/linux/1.x/1.1/enu/${P}.tar.bz2"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86 -*"
+KEYWORDS="-* ~amd64 ~x86 ~amd64-linux ~x86-linux"
 IUSE=""
 
+DEPEND=""
 RDEPEND="
 	>=dev-libs/atk-2.16.0-r1[abi_x86_32(-)]
 	>=dev-libs/expat-2.1.0-r5[abi_x86_32(-)]
@@ -42,6 +43,11 @@ RDEPEND="
 
 QA_PRESTRIPPED="/opt/FoxitReader/FoxitReader"
 S=${WORKDIR}/1.1-release
+
+pkg_setup() {
+	# x86 binary package, ABI=x86
+	has_multilib_profile && ABI="x86"
+}
 
 src_install() {
 	insinto /opt/${PN}
