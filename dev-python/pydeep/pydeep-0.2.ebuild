@@ -10,11 +10,11 @@ inherit distutils-r1 git-r3
 DESCRIPTION="Python bindings for ssdeep"
 HOMEPAGE="https://github.com/kbandla/pydeep"
 EGIT_REPO_URI="https://github.com/kbandla/pydeep.git"
-EGIT_COMMIT=""
+EGIT_COMMIT="${PV}"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
