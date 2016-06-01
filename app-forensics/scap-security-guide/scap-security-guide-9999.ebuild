@@ -14,7 +14,7 @@ EGIT_COMMIT="HEAD"
 
 LICENSE="Unlicense"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="
