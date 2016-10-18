@@ -6,7 +6,7 @@ EAPI=5
 
 inherit flag-o-matic
 
-DESCRIPTION="mfold_util: graphic rendereing for UNAFold"
+DESCRIPTION="mfold_util: graphic rendering for UNAFold"
 HOMEPAGE="http://unafold.rna.albany.edu/?q=mfold/download-mfold"
 SRC_URI="http://unafold.rna.albany.edu/download/${P}.tar.gz"
 
