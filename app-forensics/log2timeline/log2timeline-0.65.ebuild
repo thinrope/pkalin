@@ -10,7 +10,7 @@ DESCRIPTION="Create forensic supertimelines in Perl"
 HOMEPAGE="https://github.com/thinrope/log2timeline"
 SRC_URI="https://github.com/thinrope/log2timeline/archive/v${PV}.tar.gz"
 
-LICENSE="GPL3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
