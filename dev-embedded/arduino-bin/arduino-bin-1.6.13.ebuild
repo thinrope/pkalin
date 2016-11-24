@@ -8,8 +8,7 @@ inherit eutils
 
 DESCRIPTION="An open-source AVR electronics prototyping platform"
 HOMEPAGE="http://arduino.cc/"
-SRC_URI="arduino-${PV}-linux64.tar.xz"
-# FIXME: add 32bit support
+SRC_URI="https://downloads.arduino.cc/arduino-${PV}-linux64.tar.xz"
 LICENSE="GPL-2 LGPL-2 CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -21,7 +20,6 @@ RDEPEND="!!dev-embedded/arduino
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/arduino-${PV}"
-AVR_VERSION="4.8.1"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-script.patch"
@@ -31,16 +29,12 @@ src_install() {
 	exeinto "/usr/bin"
 	doexe arduino
 
-	ARD="/usr/share/arduino"
-	insinto "${ARD}"
-	doins -r hardware
-	fperms 0755 ${ARD}/hardware/tools/avr/libexec/gcc/avr/${AVR_VERSION}/cc1{,plus}
-	fperms 0755 ${ARD}/hardware/tools/avr/libexec/gcc/avr/${AVR_VERSION}/collect2
-	fperms -R 0755 ${ARD}/hardware/tools/avr/bin/
-	fperms -R 0755 ${ARD}/hardware/tools/avr/avr/bin/
-
-	doins -r libraries lib dist
-	fowners -R root:uucp "${ARD}/hardware"
+	dodir /usr/share/arduino
+	for IF in arduino-builder examples hardware lib libraries reference tools tools-builder
+	do
+		cp -R "${S}/${IF}" "${D}/usr/share/arduino/${IF}"
+	done
+	chown -R root:root "${D}/usr/share/arduino/"
 }
 
 pkg_postinst() {
