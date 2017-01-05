@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -31,7 +31,7 @@ DEPEND="media-libs/fontconfig
 	xrandr? ( x11-libs/libXrandr )"
 RDEPEND="${DEPEND}
 	nls? ( >=sys-devel/gettext-0.10.39 )
-	!app-i18n/scim-anthy[gtk3]"
+	!=app-i18n/scim-1.4.14[gtk3]"
 
 S=${WORKDIR}/${P/windowm/WindowM}
 
