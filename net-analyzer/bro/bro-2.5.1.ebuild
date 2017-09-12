@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_REQ_USE="sqlite"
-PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
+PYTHON_COMPAT=( python{2_7,3_4} )
 inherit cmake-utils python-single-r1
 
 DESCRIPTION="The Bro Network Security Monitor"
@@ -13,7 +13,7 @@ SRC_URI="${HOMEPAGE}/downloads/${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="-broccoli +broctl +broker curl debug geoip ipv6 jemalloc +python tcmalloc static-libs +tools"
+IUSE="+broccoli +broctl -broker curl debug geoip ipv6 jemalloc +python -ruby tcmalloc static-libs +tools"
 
 RDEPEND="app-shells/bash:0
 	dev-libs/openssl:0
@@ -28,6 +28,7 @@ RDEPEND="app-shells/bash:0
 	ipv6? ( net-analyzer/ipsumdump[ipv6] )
 	jemalloc? ( dev-libs/jemalloc )
 	python? ( ${PYTHON_DEPS} )
+	ruby? ( >=dev-lang/ruby-1.8:= )
 	tcmalloc? ( dev-util/google-perftools )"
 DEPEND="${RDEPEND}
 	>=dev-lang/swig-3.0.3
@@ -59,7 +60,7 @@ src_configure() {
 		-DINSTALL_BROCTL=$(usex broctl true false)
 		-DINSTALL_AUX_TOOLS=$(usex tools true false)
 		-DENABLE_MOBILE_IPV6=$(usex ipv6 true false)
-		-DDISABLE_RUBY_BINDINGS=false
+		-DDISABLE_RUBY_BINDINGS=$(usex ruby false true)
 		-DDISABLE_PYTHON_BINDINGS=$(usex python false true)
 		-DBRO_LOG_DIR="/var/log/bro/"
 		-DBRO_SPOOL_DIR="/var/spool/bro/"
