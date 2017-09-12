@@ -7,11 +7,9 @@ PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 inherit cmake-utils python-single-r1
 
-BRO_VER="2.5.1"
-
 DESCRIPTION="The Bro Network Security Monitor"
 HOMEPAGE="https://www.bro.org"
-SRC_URI="https://www.bro.org/downloads/${PN}-${BRO_VER}.tar.gz"
+SRC_URI="${HOMEPAGE}/downloads/${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -38,9 +36,8 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="broker? ( python )
 	broctl? ( python )
 	python? ( ${PYTHON_REQUIRED_USE} )"
-PATCHES=( "${FILESDIR}/bro-2.4.1-remove-unnecessary-remove.patch" )
 
-S="${WORKDIR}/${PN}-${BRO_VER}"
+PATCHES=( "${FILESDIR}/bro-2.4.1-remove-unnecessary-remove.patch" )
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
