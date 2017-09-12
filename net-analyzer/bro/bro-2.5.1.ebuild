@@ -7,7 +7,7 @@ PYTHON_REQ_USE="sqlite"
 PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 inherit cmake-utils python-single-r1
 
-BRO_VER="2.5"
+BRO_VER="2.5.1"
 
 DESCRIPTION="The Bro Network Security Monitor"
 HOMEPAGE="https://www.bro.org"
