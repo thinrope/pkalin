@@ -46,20 +46,20 @@ pkg_setup() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DENABLE_DEBUG=$(usex debug true false)
-		-DENABLE_JEMALLOC=$(usex jemalloc true false)
+		-DENABLE_DEBUG=$(usex debug)
+		-DENABLE_JEMALLOC=$(usex jemalloc)
 		-DDISABLE_PERFTOOLS=$(usex tcmalloc false true)
-		-DENABLE_BROKER=$(usex broker true false)
-		-DENABLE_CXX11=$(usex broker true false)
+		-DENABLE_BROKER=$(usex broker)
+		-DENABLE_CXX11=$(usex broker)
 		-DBROKER_PYTHON_PREFIX="/usr"
 		-DLIBCAF_INCLUDE_DIR_CORE="/usr/include/"
 		-DLIBCAF_INCLUDE_DIR_IO="/usr/include/"
 		-DLIBCAF_ROOT_DIR="/usr"
-		-DENABLE_STATIC=$(usex static-libs true false)
-		-DINSTALL_BROCCOLI=$(usex broccoli true false)
-		-DINSTALL_BROCTL=$(usex broctl true false)
-		-DINSTALL_AUX_TOOLS=$(usex tools true false)
-		-DENABLE_MOBILE_IPV6=$(usex ipv6 true false)
+		-DENABLE_STATIC=$(usex static-libs)
+		-DINSTALL_BROCCOLI=$(usex broccoli)
+		-DINSTALL_BROCTL=$(usex broctl)
+		-DINSTALL_AUX_TOOLS=$(usex tools)
+		-DENABLE_MOBILE_IPV6=$(usex ipv6)
 		-DDISABLE_RUBY_BINDINGS=$(usex ruby false true)
 		-DDISABLE_PYTHON_BINDINGS=$(usex python false true)
 		-DBRO_LOG_DIR="/var/log/bro/"
@@ -67,6 +67,7 @@ src_configure() {
 		-DBRO_ETC_INSTALL_DIR="/etc/bro/"
 		-DINSTALL_LIB_DIR="/usr/$(get_libdir)"
 		-DPY_MOD_INSTALL_DIR="$(python_get_sitedir)"
+		-DPYTHON_EXECUTABLE="/usr/bin/python"
 	)
 
 	cmake-utils_src_configure
