@@ -3,16 +3,17 @@
 
 EAPI=5
 
-MODULE_AUTHOR="JMACFARLA"
-MODULE_VERSION="1.0"
+MODULE_AUTHOR="BDFOY"
+MODULE_VERSION="1.412"
 
 inherit perl-module
 
-DESCRIPTION="Parse::Win32Registry - Parse Windows Registry Files"
+DESCRIPTION="Mac::PropertyList - work with Mac plists at a low level"
 
 LICENSE="|| ( Artistic GPL-1 GPL-2 GPL-3 )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-lang/perl"
+DEPEND="dev-perl/XML-Entities
+	dev-lang/perl"
