@@ -12,7 +12,7 @@ SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> PF_RING-${PV}.t
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="static"
+IUSE="static-libs"
 
 S="${WORKDIR}/PF_RING-${PV}/userland/lib"
 
@@ -21,6 +21,7 @@ sys-process/numactl"
 
 RDEPEND="${DEPEND}
 	=sys-kernel/pf_ring-kmod-${PV}"
+
 src_prepare() {
 	epatch "${FILESDIR}/${P}_soname.patch"
 	eapply_user
@@ -38,6 +39,6 @@ src_configure() {
 src_install() {
 	newlib.so ${PN}.so ${PN}.so.1
 	dosym ${PN}.so.1 "/usr/$(get_libdir)/${PN}.so"
-	use static && dolib ${PN}.a
+	use static-libs && dolib ${PN}.a
 
 }
