@@ -24,11 +24,6 @@ DEPEND="sys-kernel/linux-headers"
 RDEPEND="${DEPEND}
 	=sys-kernel/pf_ring-kmod-${PV}"
 
-src_prepare() {
-	epatch "${FILESDIR}/${PN}-6.6.0_soname.patch"
-	eapply_user
-}
-
 src_configure() {
 	set -- "${S}/configure" \
 		--prefix="${EPREFIX}/usr" \
