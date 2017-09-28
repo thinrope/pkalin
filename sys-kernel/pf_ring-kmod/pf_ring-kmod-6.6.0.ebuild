@@ -1,13 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 inherit linux-mod linux-info
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (kernel modules for)"
 HOMEPAGE="http://www.ntop.org/products/packet-capture/pf_ring/"
-SRC_URI="https://github.com/ntop/PF_RING/archive/v${PV}.tar.gz -> PF_RING-${PV}.tar.gz"
+SRC_URI="https://github.com/ntop/PF_RING/archive/${PV}.tar.gz -> PF_RING-${PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
