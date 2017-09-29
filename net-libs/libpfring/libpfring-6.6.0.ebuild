@@ -24,6 +24,7 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}_soname.patch"
+	epatch "${FILESDIR}/${P}_jobserver.patch"
 	eapply_user
 }
 
@@ -37,8 +38,9 @@ src_configure() {
 }
 
 src_install() {
+	emake DESTDIR="${D}" install-includes
 	newlib.so ${PN}.so ${PN}.so.1
 	dosym ${PN}.so.1 "/usr/$(get_libdir)/${PN}.so"
 	use static-libs && dolib ${PN}.a
-
+	# FIXME: Do we need to install nbpftest
 }

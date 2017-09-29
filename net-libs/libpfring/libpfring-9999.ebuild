@@ -5,7 +5,8 @@ EAPI=6
 
 inherit eutils linux-info git-r3
 
-EGIT_REPO_URI="https://github.com/ntop/PF_RING.git"
+FORK="thinrope"
+EGIT_REPO_URI="https://github.com/${FORK}/PF_RING.git"
 EGIT_COMMIT="HEAD"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
 
@@ -20,7 +21,9 @@ IUSE="static-libs"
 
 S="${WORKDIR}/${PN}/userland/lib"
 
-DEPEND="sys-kernel/linux-headers"
+DEPEND="sys-kernel/linux-headers
+sys-process/numactl"
+
 RDEPEND="${DEPEND}
 	=sys-kernel/pf_ring-kmod-${PV}"
 
@@ -34,8 +37,9 @@ src_configure() {
 }
 
 src_install() {
+	emake DESTDIR="${D}" install-includes
 	newlib.so ${PN}.so ${PN}.so.1
 	dosym ${PN}.so.1 "/usr/$(get_libdir)/${PN}.so"
 	use static-libs && dolib ${PN}.a
-
+	# FIXME: Do we need to install nbpftest
 }
