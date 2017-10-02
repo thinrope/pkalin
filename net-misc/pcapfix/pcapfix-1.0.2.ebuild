@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4
+EAPI=6
 
 DESCRIPTION="Repair and fix broken pcap files"
 HOMEPAGE="http://f00l.de/pcapfix/"
@@ -17,10 +17,11 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	sed -e 's/gcc/$(CC) $(CFLAGS)/g' -i Makefile
+	eapply_user
 }
 
 src_install() {
 	doman pcapfix.1
 	dobin pcapfix
-	dodoc README TODO Changelog
+	dodoc README Changelog
 }
