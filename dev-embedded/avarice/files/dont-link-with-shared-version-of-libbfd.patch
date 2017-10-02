@@ -1,0 +1,19 @@
+From: Vincent Tondellier <tonton-lists@team1664.org>
+Date: Sat, 5 Aug 2006 00:00:42 +0200
+Subject: avarice must not link with the shared version of libbfd
+
+Bug-Debian: https://bugs.debian.org/381505
+Forwarded: not-needed
+Last-Update: 2010-01-13
+---
+ src/Makefile.am | 2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -63,3 +63,5 @@
+ 	gnu_getopt.c    \
+ 	gnu_getopt.h    \
+ 	gnu_getopt1.c
++
++avarice_LIBS = -lusb /usr/lib/libbfd.a -lz -liberty -ldl
