@@ -79,7 +79,7 @@ FFMPEG_FLAG_MAP=(
 		zvbi:libzvbi
 		# libavfilter options
 		bs2b:libbs2b chromaprint flite:libflite frei0r
-		fribidi:libfribidi fontconfig ladspa libass truetype:libfreetype
+		fribidi:libfribidi fontconfig ladspa libass truetype:libfreetype libvidstab
 		rubberband:librubberband sofalizer:netcdf zeromq:libzmq zimg:libzimg
 		# libswresample options
 		libsoxr
@@ -245,6 +245,7 @@ RDEPEND="
 	truetype? ( >=media-libs/freetype-2.5.0.1:2[${MULTILIB_USEDEP}] )
 	vaapi? ( >=x11-libs/libva-1.2.1-r1[${MULTILIB_USEDEP}] )
 	vdpau? ( >=x11-libs/libvdpau-0.7[${MULTILIB_USEDEP}] )
+	libvidstab? ( >=media-libs/vidstab-1.1.0[${MULTILIB_USEDEP}] )
 	vorbis? (
 		>=media-libs/libvorbis-1.3.3-r1[${MULTILIB_USEDEP}]
 		>=media-libs/libogg-1.3.0[${MULTILIB_USEDEP}]
