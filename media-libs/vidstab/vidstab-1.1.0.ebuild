@@ -15,6 +15,5 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND=">=media-video/ffmpeg-3.2.4-r1
-	dev-util/cmake"
-RDEPEND="media-video/ffmpeg"
+DEPEND="dev-util/cmake"
+RDEPEND=">=media-video/ffmpeg-3.2.4-r1"
