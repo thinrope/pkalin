@@ -19,7 +19,6 @@ RDEPEND="${DEPEND}
 	app-portage/eix
 	app-portage/demerge
 	app-admin/perl-cleaner
-	app-admin/python-updater
 	app-portage/gentoolkit
 	i18n? (
 		app-text/convmv
