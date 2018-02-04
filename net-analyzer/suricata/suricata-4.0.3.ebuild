@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
 
-inherit flag-o-matic eutils user
+inherit flag-o-matic autotools eutils user
 
 DESCRIPTION="High performance Network IDS, IPS and Network Security Monitoring engine"
 HOMEPAGE="http://suricata-ids.org/"
@@ -11,8 +11,10 @@ SRC_URI="http://www.openinfosecfoundation.org/download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="+af-packet control-socket cuda debug +detection geoip hardened logrotate lua luajit nflog +nfqueue +pfring redis +rules test"
+
+REQUIRED_USE="lua? ( !luajit )"
 
 DEPEND="
 	>=dev-libs/jansson-2.9
@@ -36,6 +38,8 @@ DEPEND="
 	sys-libs/libcap-ng
 	pfring?     ( net-libs/libpfring )
 "
+# #446814
+#	prelude?    ( dev-libs/libprelude )
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -43,36 +47,70 @@ pkg_setup() {
 	enewuser ${PN} -1 -1 /var/lib/${PN} "${PN}"
 }
 
+src_prepare() {
+	eautoreconf
+}
+
 src_configure() {
-	local myeconfargs=( "--localstatedir=/var/" "--enable-non-bundled-htp" )
-	use af-packet && myeconfargs+=( $(use_enable af-packet) )
-	use detection && myeconfargs+=( $(use_enable detection) )
-	use nfqueue && myeconfargs+=( $(use_enable nfqueue) )
-	use test && myeconfargs+=( $(use_enable test coccinelle) $(use_enable test unittests) )
-	use control-socket && myeconfargs+=( $(use_enable control-socket unix-socket) )
-	use cuda && myeconfargs+=( $(use_enable cuda) )
-	use geoip && myeconfargs+=( $(use_enable geoip) )
-	use hardened && myeconfargs+=( $(use_enable hardened gccprotect) )
-	use nflog && myeconfargs+=( $(use_enable nflog) )
-	use redis && myeconfargs+=( $(use_enable redis hiredis) )
-	use pfring && myeconfargs+=( $(use_enable pfring) )
-	use lua && myeconfargs+=( $(use_enable lua) )
-	use luajit && myeconfargs+=( $(use_enable luajit) )
+	local myeconfargs=(
+		"--localstatedir=/var/" \
+		"--enable-non-bundled-htp" \
+		$(use_enable af-packet) \
+		$(use_enable detection) \
+		$(use_enable nfqueue) \
+		$(use_enable test coccinelle) \
+		$(use_enable test unittests) \
+		$(use_enable control-socket unix-socket)
+	)
+
+	if use cuda ; then
+		myeconfargs+=( $(use_enable cuda) )
+	fi
+	if use geoip ; then
+		myeconfargs+=( $(use_enable geoip) )
+	fi
+	if use hardened ; then
+		myeconfargs+=( $(use_enable hardened gccprotect) )
+	fi
+	if use nflog ; then
+		myeconfargs+=( $(use_enable nflog) )
+	fi
+	if use redis ; then
+		myeconfargs+=( $(use_enable redis hiredis) )
+	fi
+	#
+	if use pfring ; then
+		myeconfargs+=( $(use_enable pfring) )
+	fi
+	# no libprelude in portage
+# 	if use prelude ; then
+# 		myeconfargs+=( $(use_enable prelude) )
+# 	fi
+	if use lua ; then
+		myeconfargs+=( $(use_enable lua) )
+	fi
+	if use luajit ; then
+		myeconfargs+=( $(use_enable luajit) )
+	fi
 
 	if use pfring ; then
 		append-cppflags -DHAVE_PFRING_OPEN_NEW
 		append-libs -lrt -lnuma
 	fi
+	# avoid upstream configure script trying to add -march=native to CFLAGS
+	myeconfargs+=( --enable-gccmarch-native=no )
+
 	if use debug ; then
 		myeconfargs+=( $(use_enable debug) )
 		# so we can get a backtrace according to "reporting bugs" on upstream web site
-		append-cflags "-ggdb -O0"
+		CFLAGS="-ggdb -O0" econf LIBS="${LIBS}" ${myeconfargs[@]}
+	else
+		econf LIBS="${LIBS}" ${myeconfargs[@]}
 	fi
-	econf ${myeconfargs[@]}
 }
 
 src_install() {
-	einstall || die "install failed"
+	emake DESTDIR="${D}" install
 
 	insinto "/etc/${PN}"
 	insopts -m 600
