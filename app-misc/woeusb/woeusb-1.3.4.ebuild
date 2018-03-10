@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 # sys-auth/polkit "For calling woeusb as root from woeusbgui" ??
 
 src_prepare () {
-	sed -i -e "s/@@WOEUSB_VERSION@@/${PV}/" configure.ac
+	sed -i -e "s/@@WOEUSB_VERSION@@/${PV}/" configure.ac src/woeusb*
 	eautoreconf
 	eapply_user
 }

@@ -1,3 +1,6 @@
+  10 Mar 2018;  <kalin@gentoo.org> woeusb-1.3.4.ebuild:
+  app-misc/woeusb: fix version setting scope
+
   10 Mar 2018;  <kalin@gentoo.org> woeusb-1.3.4.ebuild, woeusb-9999.ebuild:
   app-misc/woeusb: adding proper dependencies
   https://github.com/slacka/WoeUSB/wiki/Software-Dependencies
