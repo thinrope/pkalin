@@ -18,7 +18,15 @@ IUSE=""
 
 DEPEND="x11-libs/wxGTK:*"
 RDEPEND="${DEPEND}
-	sys-boot/grub:2[grub_platforms_pc]"
+	sys-boot/grub:2[grub_platforms_pc]
+	sys-fs/dosfstools
+	sys-apps/findutils
+	sys-apps/grep
+	sys-block/parted
+	sys-apps/util-linux
+	sys-fs/ntfs3g
+	app-arch/p7zip"
+# sys-auth/polkit "For calling woeusb as root from woeusbgui" ??
 
 src_prepare () {
 	sed -i -e "s/@@WOEUSB_VERSION@@/${PV}/" configure.ac
