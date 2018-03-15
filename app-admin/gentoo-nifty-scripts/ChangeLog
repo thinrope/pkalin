@@ -1,2 +1,5 @@
   15 Mar 2018;  <kalin@gentoo.org> gentoo-nifty-scripts-9999.ebuild:
+  app-admin/gentoo-nifty-scripts: fixing name :-|
+
+  15 Mar 2018;  <kalin@gentoo.org> gentoo-nifty-scripts-9999.ebuild:
   app-admin/gentoo-nifty-scripts: +FTKI-deuglify.pl
