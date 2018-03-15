@@ -1,0 +1,2 @@
+  15 Mar 2018;  <kalin@gentoo.org> gentoo-nifty-scripts-9999.ebuild:
+  app-admin/gentoo-nifty-scripts: +FTKI-deuglify.pl

@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -33,4 +33,5 @@ src_install() {
 	exeinto /usr/local/bin
 	doexe usr/local/bin/jzip
 	doexe usr/local/bin/device_confirm_blank.sh
+	doexe usr/local/bin/FTKI-deuglify.pl
 }
