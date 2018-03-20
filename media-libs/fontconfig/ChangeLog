@@ -1,0 +1,24 @@
+*fontconfig-2.11.1-r2 (20 Mar 2018)
+
+  20 Mar 2018;  <kalin@gentoo.org> +files/fontconfig-2.10.2-docbook.patch,
+  +files/fontconfig-2.11.1-fc-cache-r.patch,
+  +files/fontconfig-2.7.1-latin-reorder.patch, +fontconfig-2.11.1-r2.ebuild,
+  +metadata.xml:
+   Bug: https://bugs.gentoo.org/649296  # That was needed as a workaround for me
+  (pkalin is my overlay) ...  cd /var/portage/pkalin/ cp -a /usr/portage/media-
+  libs/fontconfig/ media-libs/fontconfig/ wget -q
+  "https://gitweb.gentoo.org/repo/gentoo.git/patch/media-
+  libs/fontconfig?id=01d8b1b08bcc63d3cfe209ab11b2942f8a32dd1f"  patch -R -p1 <
+  fontconfig\?id\=01d8b1b08bcc63d3cfe209ab11b2942f8a32dd1f  rm
+  "fontconfig?id=01d8b1b08bcc63d3cfe209ab11b2942f8a32dd1f"  rm media-
+  libs/fontconfig/Manifest* cd media-libs/fontconfig/ rm fontconfig-2.12.*
+  fontconfig-2.13.0* files/fontconfig-2.12.* files/fontconfig-2.13.0-* ebuild
+  fontconfig-2.11.1-r2.ebuild digest git add . repoman commit  echo -e
+  '#https://bugs.gentoo.org/649296\n=media-libs/fontconfig-2.12*'
+  >/etc/portage/package.mask/broken_fontconfig  # fontconfig-2.11.1-r2 fails to
+  build, probably due to sys-devel/automake-1.15.1-r2 # apparently originally
+  merged with sys-devel/automake-1.15-r2 use BINPKG sudo emerge -avtK fontconfig
+  # gvim complains with: # gvim: symbol lookup error:
+  /usr/lib64/libpangoft2-1.0.so.0: undefined symbol: FcWeightFromOpenType sudo
+  emerge -avt x11-libs/pango  # fuller revdep-rebuild might be needed :-\
+  revdep-rebuild.sh -L /usr/lib64/libfontconfig.so.1
