@@ -1,3 +1,8 @@
+*woeusb-3.1.5 (29 Mar 2018)
+
+  29 Mar 2018;  <kalin@gentoo.org> +woeusb-3.1.5.ebuild, -woeusb-1.3.4.ebuild:
+  app-misc/woeusb: revbump
+
   10 Mar 2018;  <kalin@gentoo.org> woeusb-1.3.4.ebuild:
   app-misc/woeusb: fix version setting scope
 
