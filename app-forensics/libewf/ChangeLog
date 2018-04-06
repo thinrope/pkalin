@@ -1,0 +1,2 @@
+  06 Apr 2018;  <kalin@gentoo.org> libewf-9999.ebuild:
+  app-forensics/libewf: adding default USE flag
