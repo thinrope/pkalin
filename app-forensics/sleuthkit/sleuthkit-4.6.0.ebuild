@@ -38,6 +38,8 @@ DEPEND="${DEPEND}
 "
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-4.1.0-tools-shared-libs.patch
+	"${FILESDIR}"/${PN}-4.5.0-libewf.patch
 )
 
 TSK_JAR_DIR="${S}/bindings/java/lib"
