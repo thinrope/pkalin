@@ -2,13 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
 inherit versionator python-r1
 
 MY_DATE="$(get_version_component_range 1)"
-
 DESCRIPTION="Implementation of the EWF (SMART and EnCase) image format"
 HOMEPAGE="https://github.com/libyal/libewf/"
 SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_DATE}/${PN}-experimental-${MY_DATE}.tar.gz"

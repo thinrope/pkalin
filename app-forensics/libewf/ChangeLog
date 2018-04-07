@@ -1,3 +1,8 @@
+  07 Apr 2018;  <kalin@gentoo.org> libewf-20171104-r1.ebuild,
+  libewf-9999.ebuild, metadata.xml:
+  app-forensics/libewf: attempt to unify ebuilds  Note: libewf-9999.ebuild does
+  not work again.
+
 *libewf-20171104-r1 (07 Apr 2018)
 
   07 Apr 2018;  <kalin@gentoo.org> +libewf-20171104-r1.ebuild,
