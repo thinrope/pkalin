@@ -15,29 +15,37 @@ SRC_URI="https://github.com/libyal/${PN}/releases/download/${MY_DATE}/${PN}-expe
 
 LICENSE="LGPL-3"
 SLOT="0/3"
-KEYWORDS="~amd64 ~hppa ~ppc ~x86"
-IUSE="debug ewf fuse python nls ssl unicode uuid zlib"
+KEYWORDS="~amd64 ~x86"
+IUSE="bzip2 debug fuse python nls ssl static static-libs unicode uuid zlib"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 RESTRICT="mirror"
 
 DEPEND="
-	sys-libs/zlib
-	fuse? ( sys-fs/fuse )
-	uuid? ( || (
-			>=sys-apps/util-linux-2.16
-			<=sys-libs/e2fsprogs-libs-1.41.8
-			sys-darwin/libsystem
-		) )
-	ssl? ( dev-libs/openssl )
-	zlib? ( sys-libs/zlib )
+	fuse? (
+		sys-fs/fuse:0
+		static? ( sys-fs/fuse:0[static-libs] )
+		)
+	uuid? ( >=sys-apps/util-linux-2.16 )
+	ssl? (
+		dev-libs/openssl:0
+		static? ( dev-libs/openssl:0[static-libs] )
+		)
+	zlib? (
+		sys-libs/zlib
+		static? ( sys-libs/zlib[static-libs] )
+		)
+	bzip2? (
+		app-arch/bzip2
+		static? ( app-arch/bzip2[static-libs] )
+		)
 	nls? (
 		virtual/libintl
 		virtual/libiconv
 	)
-	dev-libs/libuna
-	app-forensics/libbfio
 	python? ( ${PYTHON_DEPS} )
 
+	dev-libs/libuna
+	app-forensics/libbfio
 	dev-libs/libcerror
 	dev-libs/libcthreads
 	dev-libs/libcaes
@@ -53,11 +61,9 @@ DEPEND="
 	dev-libs/libfdata
 	dev-libs/libfguid
 	dev-libs/libfvalue
-
 	dev-libs/libsmdev
 "
 TOBE_ADDED="
-	dev-libs/libbfio
 	dev-libs/libodraw
 	dev-libs/libsmraw
 
@@ -68,14 +74,14 @@ RDEPEND="${DEPEND}"
 # dev-libs/libcfile must be with libsmdev
 
 TEST="
-   ADLER32 checksum support:                 zlib
-   DEFLATE compression support:              zlib
-   BZIP2 compression support:                bzip2
-   libhmac support:                          local
-   MD5 support:                              libcrypto_evp
-   SHA1 support:                             libcrypto_evp
-   SHA256 support:                           libcrypto_evp
-   AES support:                              libcrypto_evp
+	ADLER32 checksum support:                 zlib
+	DEFLATE compression support:              zlib
+	BZIP2 compression support:                bzip2
+	libhmac support:                          local
+	MD5 support:                              libcrypto_evp
+	SHA1 support:                             libcrypto_evp
+	SHA256 support:                           libcrypto_evp
+	AES support:                              libcrypto_evp
 "
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
@@ -88,15 +94,20 @@ pkg_setup() {
 
 src_configure() {
 	local myconf=(
+		--disable-rpath
+		--enable-multi-threading-support
+		--with-libbfio
+		$(use_enable static static-executables)
+		$(use_enable static-libs static)
 		$(use_enable debug debug-output)
 		$(use_enable debug verbose-output)
-		$(use_enable ewf v1-api)
 		$(use_enable python)
 		$(use_enable nls)
 		$(use_with nls libiconv-prefix)
 		$(use_with nls libintl-prefix)
 		$(use_enable unicode wide-character-type)
 		$(use_with zlib)
+		$(use_with bzip2)
 		$(use_with ssl openssl)
 		$(use_with uuid libuuid)
 		$(use_with fuse libfuse)
