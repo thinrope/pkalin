@@ -1,6 +1,0 @@
-*ekiga-4.0.1-r2 (06 Apr 2018)
-
-  06 Apr 2018;  <kalin@gentoo.org> +ekiga-4.0.1-r2.ebuild,
-  -ekiga-4.0.1-r1.ebuild:
-  net-voip/ekiga: bump to change icon-theme  x11-themes/gnome-icon-theme ->
-  x11-themes/adwaita-icon-theme
