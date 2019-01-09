@@ -1,19 +1,18 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit git-r3 cmake-utils
+inherit cmake-utils
 
+MY_P="vid.stab-${PV}"
 DESCRIPTION="Video stabilization library"
 HOMEPAGE="http://public.hronopik.de/vid.stab/"
-EGIT_REPO_URI="https://github.com/georgmartius/vid.stab.git"
-EGIT_TAG="v.${PV}"
+SRC_URI="https://github.com/georgmartius/vid.stab/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND="dev-util/cmake"
-RDEPEND=">=media-video/ffmpeg-3.2.4-r1"
+S="${WORKDIR}/${MY_P}"
