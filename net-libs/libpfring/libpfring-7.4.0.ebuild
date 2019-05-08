@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 2018-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils linux-info
 
@@ -20,12 +20,7 @@ DEPEND="sys-kernel/linux-headers
 sys-process/numactl"
 
 RDEPEND="${DEPEND}
-	=sys-kernel/pf_ring-kmod-${PV}"
-
-src_prepare() {
-	epatch "${FILESDIR}/${P}_jobserver.patch"
-	eapply_user
-}
+	~sys-kernel/pf_ring-kmod-${PV}"
 
 src_configure() {
 	set -- "${S}/configure" \

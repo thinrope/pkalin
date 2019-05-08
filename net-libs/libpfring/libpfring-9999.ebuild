@@ -1,11 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 2018-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils linux-info git-r3
 
-FORK="thinrope"
+FORK="ntop" #use thinrope for more stable :-D
 EGIT_REPO_URI="https://github.com/${FORK}/PF_RING.git"
 EGIT_COMMIT="HEAD"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
@@ -22,10 +22,9 @@ IUSE="static-libs"
 S="${WORKDIR}/${PN}/userland/lib"
 
 DEPEND="sys-kernel/linux-headers
-sys-process/numactl"
-
+	sys-process/numactl"
 RDEPEND="${DEPEND}
-	=sys-kernel/pf_ring-kmod-${PV}"
+	~sys-kernel/pf_ring-kmod-${PV}"
 
 src_configure() {
 	set -- "${S}/configure" \
