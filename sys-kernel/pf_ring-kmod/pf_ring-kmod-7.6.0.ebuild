@@ -1,4 +1,4 @@
-# Copyright 2018-2019 Gentoo Authors
+# Copyright 2018-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -26,7 +26,7 @@ BUILD_TARGETS="modules"
 
 pkg_setup() {
 	linux-mod_pkg_setup
-	BUILD_PARAMS="-C ${KV_DIR} SUBDIRS=${S} EXTRA_CFLAGS='-I${S}'"
+	BUILD_PARAMS="-C ${KV_DIR} M=${S} EXTRA_CFLAGS='-I${S}'"
 }
 
 src_install() {
