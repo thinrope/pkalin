@@ -1,6 +1,0 @@
-*sleuthkit-4.6.0 (06 Apr 2018)
-
-  06 Apr 2018;  <kalin@gentoo.org> +sleuthkit-4.6.0.ebuild,
-  -files/sleuthkit-4.1.0-system-sqlite.patch, -sleuthkit-4.2.0-r1.ebuild:
-  app-forensics/sleuthkit: Adding new unstable  copied from pentoo overlay with
-  mods
