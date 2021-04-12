@@ -47,14 +47,3 @@ src_configure(){
 	$(use_enable btrfs) \
 	$(use_enable vmfs)
 }
-
-src_install(){
-	cd "${S}/src"
-	dosbin partclone.{restore,chkimg,info,imager}
-	dosbin partclone.{dd,extfs}
-	use xfs && dosbin partclone.xfs
-	use hfs && dosbin partclone.hfsp
-	use fat && dosbin partclone.fat
-	use exfat && dosbin partclone.exfat
-	use ntfs && dosbin partclone.ntfs{,fixboot}
-}
