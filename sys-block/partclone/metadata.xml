@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>maintainer-needed@gentoo.org</email>
+  </maintainer>
+  <use>
+    <flag name="btrfs">Support btrfs</flag>
+    <flag name="fat">Support fat</flag>
+    <flag name="exfat">Support exfat</flag>
+    <flag name="minix">Support minix</flag>
+    <flag name="ntfs">Support ntfs</flag>
+    <flag name="hfs">Support hfs</flag>
+    <flag name="vmfs">Support vmfs</flag>
+    <flag name="xfs">Support xfs</flag>
+  </use>
+</pkgmetadata>
