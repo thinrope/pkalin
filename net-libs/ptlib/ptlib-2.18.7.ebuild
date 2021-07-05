@@ -1,18 +1,20 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
 inherit eutils
-
+#
+# FIXME: this installs /usr/lib64/libpt.so.2.18-beta8, so we might need to tweak PV
+#
 DESCRIPTION="Network focused portable C++ class library providing high level functions"
 HOMEPAGE="http://www.opalvoip.org/"
 SRC_URI="mirror://sourceforge/opalvoip/${P}.tar.bz2
-	doc? ( mirror://sourceforge/opalvoip/${PN}-2.10.10-htmldoc.tar.bz2 )"
+	doc? ( mirror://sourceforge/opalvoip/${P}-htmldoc.tar.bz2 )"
 
 LICENSE="MPL-1.0"
 SLOT="0/${PV}"
-KEYWORDS="alpha amd64 ~arm ia64 ppc ppc64 sparc x86"
+KEYWORDS="~amd64"
 # default enabled are features from 'minsize', the most used according to ptlib
 IUSE="alsa +asn debug doc +dtmf examples ffmpeg ftp +http ipv6
 xmpp ldap lua mail odbc oss pch pulseaudio qos remote sasl sdl serial
@@ -21,7 +23,7 @@ vxml +wav +xml xmlrpc"
 
 CDEPEND="
 	ldap? ( net-nds/openldap )
-	lua? ( dev-lang/lua )
+	lua? ( dev-lang/lua:* )
 	odbc? ( dev-db/unixODBC )
 	pulseaudio? ( media-sound/pulseaudio )
 	sasl? ( dev-libs/cyrus-sasl:2 )
@@ -32,7 +34,7 @@ CDEPEND="
 	xml? ( dev-libs/expat )
 	!!dev-libs/pwlib"
 RDEPEND="${CDEPEND}
-	ffmpeg? ( virtual/ffmpeg )"
+	ffmpeg? ( media-video/ffmpeg )"
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
 	sys-devel/bison
@@ -56,16 +58,7 @@ REQUIRED_USE="sdl? ( video )
 	soap? ( http xml )"
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-2.10.9-svn_revision_override.patch" \
-		"${FILESDIR}/${PN}-2.10.9-pkgconfig_ldflags.patch" \
-		"${FILESDIR}/${PN}-2.10.9-respect_cxxflags.patch" \
-		"${FILESDIR}/${PN}-2.10.10-mga-bison-parameter.patch" \
-		"${FILESDIR}/${PN}-2.10.10-respect_cflags_cxxflags.patch" \
-		"${FILESDIR}/${P}-gcc6.patch"
-
-	if ! use telnet; then
-		epatch "${FILESDIR}/${PN}-2.10.9-disable-telnet-symbols.patch"
-	fi
+	epatch "${FILESDIR}/${P}_post.mak.patch"
 
 	# remove visual studio related files from samples/
 	if use examples; then
@@ -186,8 +179,6 @@ src_install() {
 	if use doc; then
 		dohtml -r "${WORKDIR}"/html/* || die "dohtml failed"
 	fi
-
-	dodoc History.txt ReadMe.txt ReadMe_QOS.txt || die "dodoc failed"
 
 	if use sound || use video; then
 		newdoc plugins/ReadMe.txt ReadMe-Plugins.txt || die "newdoc failed"

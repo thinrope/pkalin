@@ -1,0 +1,11 @@
+--- a/make/post.mak	2021-07-03 10:26:56.281448527 +0200
++++ b/make/post.mak	2021-07-03 10:27:51.010938120 +0200
+@@ -309,7 +309,7 @@
+     $(SHARED_LIB_FILE): $(STATIC_LIB_FILE) $(OBJS)
+ 	@if [ ! -d $(dir $@) ] ; then $(MKDIR_P) $(dir $@) ; fi
+ 	$(Q_LD)$(LD) -o $@ $(strip $(SHARED_LDFLAGS) $(LDFLAGS) $(OBJS) $(LIBS))
+-	$(BUILD_DEBUG_INFO)
++	#$(BUILD_DEBUG_INFO)
+ 
+   endif # SHARED_LIB_FILE
+ 
