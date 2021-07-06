@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -11,9 +11,9 @@ SRC_URI="mirror://sourceforge/opalvoip/${P}.tar.bz2
 
 LICENSE="MPL-1.0"
 SLOT="0"
-KEYWORDS="alpha amd64 ia64 ppc ppc64 sparc x86"
-IUSE="celt debug doc +dtmf examples fax ffmpeg h224 h281 h323 iax ilbc
-ipv6 ivr java ldap libav lid +plugins sbc +sip +sipim +sound srtp ssl static-libs
+KEYWORDS="~amd64"
+IUSE="debug doc +dtmf examples fax ffmpeg h224 h281 h323 iax ilbc
+ipv6 ivr java ldap lid +plugins sbc +sip +sipim +sound srtp ssl static-libs
 stats swig theora +video vpb vxml +wav x264 x264-static +xml"
 
 REQUIRED_USE="
@@ -31,14 +31,11 @@ RDEPEND="
 	java? ( >=virtual/jre-1.4:* )
 	plugins? (
 		media-sound/gsm
-		celt? ( media-libs/celt:0 )
-		ffmpeg? (
-			libav? ( media-video/libav:0=[encode] )
-			!libav? ( media-video/ffmpeg:0=[encode] ) )
-		ilbc? ( dev-libs/ilbc-rfc3951 )
+		ffmpeg? ( media-video/ffmpeg[encode] )
+		ilbc? ( media-libs/libilbc )
 		sbc? ( media-libs/libsamplerate )
 		theora? ( media-libs/libtheora )
-		x264? (	virtual/ffmpeg
+		x264? (	media-video/ffmpeg
 			media-libs/x264 ) )
 	srtp? ( net-libs/libsrtp:0= )
 	vxml? ( net-libs/ptlib[http,vxml] )
@@ -78,28 +75,6 @@ src_prepare() {
 		rm -f samples/*/*.dsw
 	fi
 
-	# LFS ffmpeg2+ fixes.
-	eapply "${FILESDIR}"/opal-3.10.10-ffmpeg2-1.patch
-
-	if ! use h323; then
-		# Without this patch, ekiga wont compile, even with
-		# USE=-h323.
-		eapply "${FILESDIR}/${PN}-3.10.9-disable-h323-workaround.patch"
-	fi
-
-	eapply "${FILESDIR}/${PN}-3.10.9-java-ruby-swig-fix.patch"
-
-	sed -i -e "s:\(.*HAS_H224.*\), \[OPAL_H323\]:\1:" configure.ac \
-		|| die "sed failed"
-
-	# sed fixes for ffmpeg-3.
-	sed -e 's/CODEC_ID/AV_&/' \
-		-e 's/PIX_FMT_/AV_&/' \
-		-i plugins/video/H.263-1998/h263-1998.cxx \
-		   plugins/video/common/dyna.cxx          \
-		   plugins/video/H.264/h264-x264.cxx      \
-		   plugins/video/MPEG4-ffmpeg/mpeg4.cxx || die "sed failed"
-
 	eaclocal
 	eautoconf
 
@@ -109,12 +84,10 @@ src_prepare() {
 	eautoconf
 	cd ..
 
-	# disable celt if celt is not enabled (prevent auto magic dep)
+	# disable celt (prevent auto magic dep)
 	# already in repository
-	if ! use celt; then
-		sed -i -e "s/HAVE_CELT=yes/HAVE_CELT=no/" plugins/configure \
+	sed -i -e "s/HAVE_CELT=yes/HAVE_CELT=no/" plugins/configure \
 			|| die "sed failed"
-	fi
 
 	# fix automatic swig detection, upstream bug 2712521 (upstream reject it)
 	if ! use swig; then
@@ -185,6 +158,7 @@ src_configure() {
 		$(use_enable sbc) \
 		$(use_enable sip) \
 		$(use_enable sipim) \
+		$(use_enable srtp) \
 		$(use_enable stats statistics) \
 		$(use_enable video) $(use_enable video rfc4175) \
 		$(use_enable vpb) \
