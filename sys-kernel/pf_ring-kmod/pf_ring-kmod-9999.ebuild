@@ -1,4 +1,4 @@
-# Copyright 2018-2020 Gentoo Authors
+# Copyright 2018-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -17,7 +17,9 @@ HOMEPAGE="http://www.ntop.org/products/packet-capture/pf_ring/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS=""
+if [[ ${PV} != *9999 ]] ; then
+	KEYWORDS="~amd64"
+fi
 IUSE=""
 
 DEPEND="virtual/linux-sources"

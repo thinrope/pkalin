@@ -1,4 +1,4 @@
-# Copyright 2018-2019 Gentoo Authors
+# Copyright 2018-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,11 +12,12 @@ EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (libpfring)"
 HOMEPAGE="http://www.ntop.org/products/packet-capture/pf_ring/"
-SRC_URI=""
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS=""
+if [[ ${PV} != *9999 ]] ; then
+	KEYWORDS="~amd64"
+fi
 IUSE="static-libs"
 
 S="${WORKDIR}/${PN}/userland/lib"
@@ -37,8 +38,7 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install-includes
-	newlib.so ${PN}.so ${PN}.so.1
-	dosym ${PN}.so.1 "/usr/$(get_libdir)/${PN}.so"
 	use static-libs && dolib ${PN}.a
+	default
 	# FIXME: Do we need to install nbpftest
 }
