@@ -1,0 +1,41 @@
+--- A/src/scan_rar.cpp	2021-10-26 02:05:31.639228168 +0200
++++ B/src/scan_rar.cpp	2021-10-26 02:08:52.406326913 +0200
+@@ -539,7 +539,7 @@
+ 
+     CmdExtract extract; //from the extract.cpp file; allows the extraction to occur
+ 
+-    byte *startingaddress = (byte*) input;
++    uuint8_t *startingaddress = const_cast<uint8_t*>(input);
+ 
+     ComprDataIO mydataio;
+     mydataio.SetSkipUnpCRC(true); //skip checking the CRC to allow more processing to occur
+
+--- A/src/rar/extract.cpp	2021-10-26 02:12:31.779249991 +0200
++++ B/src/rar/extract.cpp	2021-10-26 02:15:21.496636688 +0200
+@@ -56,7 +56,7 @@
+ }
+ 
+ 
+-void CmdExtract::DoExtract(CommandData *Cmd, byte* ptrlocation, int64 ptrlength, std::string& xml)
++void CmdExtract::DoExtract(CommandData *Cmd, uint8_t* ptrlocation, int64 ptrlength, std::string& xml)
+ {
+   PasswordCancelled=false;
+   DataIO.SetCurrentCommand(*Cmd->Command);
+@@ -142,7 +142,7 @@
+ }
+ 
+ 
+-EXTRACT_ARC_CODE CmdExtract::ExtractArchive(CommandData *Cmd, byte *ptrlocation, int64 ptrlength, std::string& xml)
++EXTRACT_ARC_CODE CmdExtract::ExtractArchive(CommandData *Cmd, uint8_t *ptrlocation, int64 ptrlength, std::string& xml)
+ {
+   Archive Arc(Cmd);
+   Arc.InitArc(ptrlocation, ptrlength); //initialize the pointer location
+@@ -900,7 +900,7 @@
+ 
+ void CmdExtract::UnstoreFile(ComprDataIO &DataIO,int64 DestUnpSize)
+ {
+-  Array<byte> Buffer(0x10000);
++  Array<uint8_t> Buffer(0x10000);
+   while (1)
+   {
+     uint Code=DataIO.UnpRead(&Buffer[0],Buffer.Size());
