@@ -48,6 +48,7 @@ pkg_setup() {
 	fi
 
 	BUILD_TARGETS="all"
+	MODULE_NAMES="ipt_NETFLOW(ipt_netflow)"
 	IPT_LIB="/usr/$(get_libdir)/xtables"
 
 	linux-mod_pkg_setup
