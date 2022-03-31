@@ -33,4 +33,5 @@ src_install() {
 	doexe usr/local/bin/jzip
 	doexe usr/local/bin/device_confirm_blank.sh
 	doexe usr/local/bin/FTKI_deuglify.pl
+	doexe usr/local/bin/suc
 }
