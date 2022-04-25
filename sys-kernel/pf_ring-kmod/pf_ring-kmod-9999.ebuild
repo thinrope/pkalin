@@ -34,11 +34,15 @@ BUILD_TARGETS="modules"
 
 pkg_setup() {
 	linux-mod_pkg_setup
-	BUILD_PARAMS="-C ${KV_DIR} M=${S} EXTRA_CFLAGS='-I${S}'"
 }
 
 src_unpack() {
 	git-r3_src_unpack
+}
+
+src_compile() {
+	BUILD_PARAMS="-C ${KV_DIR} M=${S} EXTRA_CFLAGS='-I${S}'"
+	linux-mod_src_compile
 }
 
 src_install() {
