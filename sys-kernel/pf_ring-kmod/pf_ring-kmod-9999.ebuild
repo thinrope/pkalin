@@ -1,4 +1,4 @@
-# Copyright 2018-2021 Gentoo Authors
+# Copyright 2018-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,10 +6,7 @@ EAPI=7
 inherit linux-mod linux-info git-r3
 
 FORK="ntop" #use thinrope for more stable :-D
-
 EGIT_REPO_URI="https://github.com/${FORK}/PF_RING.git"
-EGIT_BRANCH="master"
-EGIT_COMMIT="HEAD"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (kernel modules for)"
@@ -19,6 +16,9 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 if [[ ${PV} != *9999 ]] ; then
 	KEYWORDS="~amd64"
+	EGIT_BRANCH="${PV}-stable"
+else
+	EGIT_BRANCH="master"
 fi
 IUSE=""
 
