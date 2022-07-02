@@ -35,3 +35,9 @@ DEPEND="media-libs/exiftool
 	dev-perl/Parse-Win32Registry"
 
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	perl-module_src_prepare
+	rm ${S}/README
+	cp ${S}/docs/README.txt ${S}/
+}
