@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 inherit perl-module
 
@@ -11,7 +11,7 @@ SRC_URI="https://github.com/thinrope/log2timeline/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64"
 IUSE=""
 
 DEPEND="media-libs/exiftool
