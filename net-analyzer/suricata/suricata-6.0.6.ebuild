@@ -6,7 +6,7 @@ EAPI=7
 LUA_COMPAT=( lua5-1 luajit )
 PYTHON_COMPAT=( python3_9 )
 
-inherit autotools linux-info lua-single python-single-r1 systemd tmpfiles
+inherit autotools flag-o-matic linux-info lua-single python-single-r1 systemd tmpfiles
 
 DESCRIPTION="High performance Network IDS, IPS and Network Security Monitoring engine"
 HOMEPAGE="https://suricata.io/"
@@ -14,7 +14,7 @@ SRC_URI="https://www.openinfosecfoundation.org/download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0/6"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="+af-packet bpf control-socket cuda debug +detection geoip hardened hyperscan lua lz4 nflog +nfqueue pfring redis systemd test"
 
 RESTRICT="!test? ( test )"
