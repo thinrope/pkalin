@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="Tool for managing windows's LDM partitions"
 HOMEPAGE="https://github.com/mdbooth/libldm"
@@ -19,6 +19,7 @@ src_prepare() {
 	# Remove problematic LDFLAGS declaration
 	sed -i -e 's/ -Werror//g' src/Makefile.am || die
 	eautoreconf
+	eapply_user
 }
 
 src_unpack() {
