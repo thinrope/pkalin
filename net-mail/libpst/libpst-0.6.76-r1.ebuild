@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -23,9 +23,7 @@ RDEPEND="
 	dii? ( media-gfx/imagemagick:=[png] )
 	python? (
 		${PYTHON_DEPS}
-		$(python_gen_cond_dep '
-			>=dev-libs/boost-1.70:=[python,${PYTHON_MULTI_USEDEP}]
-		')
+		$(python_gen_cond_dep 'dev-libs/boost:0=[python,${PYTHON_USEDEP}]')
 	)"
 DEPEND="${RDEPEND}
 	virtual/libiconv
@@ -37,12 +35,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# don't build the static python library
-	#eapply "${FILESDIR}"/${PN}-0.6.52-no-static-python-lib.patch
-
-	# fix pkgconfig file for static linking
-	#eapply "${FILESDIR}"/${PN}-0.6.53-pkgconfig-static.patch
-
 	# conditionally install the extra documentation
 	if ! use doc; then
 		sed -i -e "/SUBDIRS/s: html::" Makefile.am || die
