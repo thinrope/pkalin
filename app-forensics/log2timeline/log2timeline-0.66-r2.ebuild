@@ -11,7 +11,7 @@ SRC_URI="https://github.com/thinrope/log2timeline/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="media-libs/exiftool
@@ -38,6 +38,6 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	perl-module_src_prepare
-	rm ${S}/README
-	cp ${S}/docs/README.txt ${S}/
+	rm "${S}/README"
+	cp "${S}/docs/README.txt" "${S}/"
 }

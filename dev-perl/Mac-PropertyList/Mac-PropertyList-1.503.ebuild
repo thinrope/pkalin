@@ -11,12 +11,11 @@ inherit perl-module
 DESCRIPTION="Mac::PropertyList - work with Mac plists at a low level"
 
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE=""
 LICENSE="|| ( Artistic GPL-1 GPL-2 GPL-3 )"
 
-DEPEND="dev-perl/XML-Entities
-	dev-lang/perl"
+DEPEND="dev-perl/XML-Entities"
 
 src_prepare() {
 	default
