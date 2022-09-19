@@ -1,21 +1,23 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 LUA_COMPAT=( lua5-1 luajit )
-PYTHON_COMPAT=( python3_9 )
+PYTHON_COMPAT=( python3_{8..11} )
 
-inherit autotools flag-o-matic linux-info lua-single python-single-r1 systemd tmpfiles
+inherit autotools flag-o-matic linux-info lua-single python-single-r1 systemd tmpfiles verify-sig
 
 DESCRIPTION="High performance Network IDS, IPS and Network Security Monitoring engine"
 HOMEPAGE="https://suricata.io/"
-SRC_URI="https://www.openinfosecfoundation.org/download/${P}.tar.gz"
+SRC_URI="https://www.openinfosecfoundation.org/download/${P}.tar.gz
+	verify-sig? ( https://www.openinfosecfoundation.org/download/${P}.tar.gz.sig )"
 
 LICENSE="GPL-2"
 SLOT="0/6"
 KEYWORDS="~amd64"
 IUSE="+af-packet bpf control-socket cuda debug +detection geoip hardened hyperscan lua lz4 nflog +nfqueue pfring redis systemd test"
+VERIFY_SIG_OPENPGP_KEY_PATH="${BROOT}/usr/share/openpgp-keys/openinfosecfoundation.org.asc"
 
 RESTRICT="!test? ( test )"
 
@@ -40,7 +42,7 @@ RDEPEND="${PYTHON_DEPS}
 	net-libs/libpcap
 	sys-apps/file
 	sys-libs/libcap-ng
-	bpf?        ( >=dev-libs/libbpf-0.1.0 )
+	bpf?        ( <dev-libs/libbpf-1.0.0 )
 	cuda?       ( dev-util/nvidia-cuda-toolkit )
 	geoip?      ( dev-libs/libmaxminddb:= )
 	hyperscan?  ( dev-libs/hyperscan )
@@ -53,6 +55,7 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}
 	>=sys-devel/autoconf-2.69-r5
 	virtual/rust"
+BDEPEND="verify-sig? ( >=sec-keys/openpgp-keys-oisf-20200807 )"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-5.0.1_configure-no-lz4-automagic.patch"
@@ -81,6 +84,9 @@ src_prepare() {
 }
 
 src_configure() {
+	# Bug #861242
+	filter-lto
+
 	local myeconfargs=(
 		"--localstatedir=/var" \
 		"--runstatedir=/run" \
@@ -144,8 +150,8 @@ src_install() {
 	fperms 750 "/var/lib/${PN}" "/var/log/${PN}" "/etc/${PN}"
 	fperms 2750 "/var/lib/${PN}/rules" "/var/lib/${PN}/update"
 
-	newinitd "${FILESDIR}/${PN}-5.0.1-init" ${PN}
-	newconfd "${FILESDIR}/${PN}-5.0.1-conf" ${PN}
+	newinitd "${FILESDIR}/${PN}.initd" ${PN}
+	newconfd "${FILESDIR}/${PN}.confd" ${PN}
 	systemd_dounit "${FILESDIR}"/${PN}.service
 	newtmpfiles "${FILESDIR}"/${PN}.tmpfiles ${PN}.conf
 
