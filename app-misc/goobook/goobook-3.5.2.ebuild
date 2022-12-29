@@ -15,15 +15,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-	>=dev-python/google-api-python-client-1.7.12[${PYTHON_USEDEP}]
-	>=dev-python/simplejson-3.16.0[${PYTHON_USEDEP}]
-	>=dev-python/oauth2client-1.5.0[${PYTHON_USEDEP}]
-	<dev-python/oauth2client-5[${PYTHON_USEDEP}]
-	dev-python/pyxdg[${PYTHON_USEDEP}]"
+	>=dev-python/google-api-python-client-2.68.0[${PYTHON_USEDEP}]
+	>=dev-python/simplejson-3.18.0[${PYTHON_USEDEP}]
+	>=dev-python/oauth2client-4.1.3[${PYTHON_USEDEP}]
+	>=dev-python/pyxdg-0.28[${PYTHON_USEDEP}]
+	>=dev-python/setuptools-65.6.3[${PYTHON_USEDEP}]"
 
 PATCHES=(
-	# https://gitlab.com/goobook/goobook/-/merge_requests/13
-	"${FILESDIR}"/${P}-pyxdg.patch
+	"${FILESDIR}"/${P}-setup.patch
 )
 
 DISABLE_AUTOFORMATTING=1
