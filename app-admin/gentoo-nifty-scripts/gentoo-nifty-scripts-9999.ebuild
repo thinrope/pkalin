@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -29,9 +29,10 @@ RDEPEND="${DEPEND}
 src_install() {
 	exeinto /usr/local/sbin
 	doexe usr/local/sbin/update-gentoo.sh
+	doexe usr/local/sbin/device_confirm_blank.sh
+	doexe usr/local/sbin/device_make_blank.sh
 	exeinto /usr/local/bin
 	doexe usr/local/bin/jzip
-	doexe usr/local/bin/device_confirm_blank.sh
 	doexe usr/local/bin/FTKI_deuglify.pl
 	doexe usr/local/bin/suc
 }
