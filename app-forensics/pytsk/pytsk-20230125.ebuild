@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{7,9} )
+PYTHON_COMPAT=( python3_{7,10} )
 
 inherit distutils-r1
 
@@ -16,9 +16,11 @@ KEYWORDS="~amd64"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND=">=app-forensics/sleuthkit-4.10
+DEPEND=">=app-forensics/sleuthkit-4.11
 	sys-libs/talloc
 	${PYTHON_DEPS}"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}3-${PV}"
+
+DISTUTILS_EXT=1

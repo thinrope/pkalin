@@ -1,16 +1,16 @@
-# Copyright 2018-2022 Gentoo Authors
+# Copyright 2018-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit eutils linux-info git-r3
+inherit linux-info git-r3
 
 FORK="ntop" #use thinrope for more stable :-D
 EGIT_REPO_URI="https://github.com/${FORK}/PF_RING.git"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (libpfring)"
-HOMEPAGE="http://www.ntop.org/products/packet-capture/pf_ring/"
+HOMEPAGE="https://www.ntop.org/products/packet-capture/pf_ring/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
