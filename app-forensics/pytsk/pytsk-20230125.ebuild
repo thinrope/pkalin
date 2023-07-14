@@ -13,7 +13,7 @@ SRC_URI="https://github.com/py4n6/${PN}/releases/download/${PV}/${PN}3-${PV}.tar
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="debug"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND=">=app-forensics/sleuthkit-4.11
