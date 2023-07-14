@@ -1,7 +1,7 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit linux-mod
 
@@ -23,12 +23,6 @@ CONFIG_CHECK="~FB_VIRTUAL ~!INTEL_IOMMU"
 
 pkg_setup() {
 	linux-mod_pkg_setup
-}
-
-src_prepare() {
-	epatch "${FILESDIR}/${P}-linux-4.11.0.patch"
-
-	default
 }
 
 src_compile() {
