@@ -16,7 +16,7 @@ SRC_URI="https://github.com/log2timeline/dfdatetime/archive/refs/tags/${HASH_COM
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64"
 IUSE="test"
 
 RDEPEND="
@@ -31,3 +31,8 @@ DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 distutils_enable_tests setup.py
+
+src_prepare() {
+	sed -i -e "s#share/doc/${PN}#share/doc/${PF}#;" setup.py || die
+	distutils-r1_src_prepare
+}

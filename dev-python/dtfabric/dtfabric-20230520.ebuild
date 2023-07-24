@@ -34,6 +34,6 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 distutils_enable_tests setup.py
 
 src_prepare() {
-	sed -i -e "s#share/doc/${PN}#share/doc/${P}#;" setup.py || die
+	sed -i -e "s#share/doc/${PN}#share/doc/${PF}#;" setup.py || die
 	distutils-r1_src_prepare
 }
