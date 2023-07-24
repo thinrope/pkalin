@@ -12,7 +12,7 @@ SRC_URI="https://github.com/lsof-org/lsof/releases/download/${PV}/${P}.tar.gz"
 
 LICENSE="lsof"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ppc ppc64 ~riscv ~s390 sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="rpc selinux"
 
 RDEPEND="
@@ -28,12 +28,17 @@ BDEPEND="
 # Needs fixing first for sandbox
 RESTRICT="test"
 
+PATCHES=(
+	"${FILESDIR}"/${P}-fix-common-include-strftime.patch
+)
+
 src_configure() {
+	# TODO: drop after 4.98.0: https://github.com/lsof-org/lsof/commit/4fbe0b78f63ce115f25cf7a49756745e3bf47fea
 	export ac_cv_header_selinux_selinux_h=$(usex selinux)
 
+	# TODO: drop after 4.98.0: https://github.com/lsof-org/lsof/commit/22d9cedfca4672601f35f7683907373cd5124121
 	[[ ${CHOST} == *-solaris2.11 ]] && append-cppflags -DHAS_PAD_MUTEX
 
-	append-cppflags -DHAS_STRFTIME
 	local myeconfargs=(
 		$(use_with rpc libtirpc)
 	)
