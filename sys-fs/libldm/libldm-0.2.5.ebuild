@@ -11,7 +11,13 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 RESTRICT="mirror"
-DEPEND="dev-util/gtk-doc"
+DEPEND="
+	>=sys-libs/zlib-1.2
+	dev-libs/glib:2
+	dev-libs/json-glib
+	dev-util/gtk-doc
+	sys-apps/util-linux
+	sys-fs/lvm2"
 
 inherit autotools flag-o-matic
 
