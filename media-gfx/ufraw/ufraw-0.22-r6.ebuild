@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,7 +19,7 @@ REQUIRED_USE="gimp? ( gtk )"
 BDEPEND="virtual/pkgconfig"
 RDEPEND="
 	dev-libs/glib:2
-	media-gfx/exiv2
+	>=media-gfx/exiv2-0.28
 	media-libs/lcms:2=
 	>=media-libs/lensfun-0.2.5:=
 	media-libs/libpng:0=
@@ -47,6 +47,7 @@ PATCHES=(
 	"${FILESDIR}"/${P}-CVE-2015-8366.patch
 	"${FILESDIR}"/${P}-CVE-2018-19655.patch
 	"${FILESDIR}"/${P}-glib-2.68.patch
+	"${FILESDIR}"/${P}-exiv2-0.28.patch
 )
 
 src_prepare() {
