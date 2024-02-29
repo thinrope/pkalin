@@ -39,7 +39,7 @@ RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 	')
-	>=net-libs/libhtp-0.5.45
+	>=net-libs/libhtp-0.5.46
 	net-libs/libpcap
 	sys-apps/file
 	sys-libs/libcap-ng
@@ -55,7 +55,7 @@ RDEPEND="${PYTHON_DEPS}
 	pfring?     ( net-libs/libpfring )
 	redis?      ( dev-libs/hiredis:= )"
 DEPEND="${RDEPEND}
-	>=sys-devel/autoconf-2.69-r5
+	>=dev-build/autoconf-2.69-r5
 	virtual/rust"
 BDEPEND="verify-sig? ( >=sec-keys/openpgp-keys-oisf-20200807 )"
 
@@ -64,6 +64,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.0.7_configure-no-hyperscan-automagic.patch"
 	"${FILESDIR}/${PN}-6.0.0_default-config.patch"
 	"${FILESDIR}/${PN}-7.0.2_configure-no-sphinx-pdflatex-automagic.patch"
+	"${FILESDIR}/${PN}-7.0.3_fix-build-with-gcc14.patch"
 )
 
 pkg_pretend() {
@@ -104,6 +105,7 @@ src_configure() {
 		$(use_enable af-packet) \
 		$(use_enable af-xdp) \
 		$(use_enable bpf ebpf) \
+		$(use_enable pfring pfring) \
 		$(use_enable control-socket unix-socket) \
 		$(use_enable cuda) \
 		$(use_enable detection) \
