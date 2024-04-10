@@ -11,8 +11,8 @@ SRC_URI="https://github.com/libyal/libfcrypto/releases/download/${PV}/${PN}-alph
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls"
+KEYWORDS="amd64"
+IUSE="nls +python"
 
 DEPEND="
 	nls? (
@@ -35,7 +35,7 @@ src_configure() {
 		$(use_enable nls) \
 		$(use_with nls libiconv-prefix) \
 		$(use_with nls libintl-prefix) \
-
+		$(use_enable python)
 }
 
 src_install() {
