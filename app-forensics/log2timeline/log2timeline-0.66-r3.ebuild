@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -40,4 +40,10 @@ src_prepare() {
 	perl-module_src_prepare
 	rm "${S}/README"
 	cp "${S}/docs/README.txt" "${S}/"
+}
+
+src_install() {
+	emake DESTDIR="${D}" install
+	rm ${D}/usr/bin/log2timeline ${D}/usr/bin/faersluskra2timalina
+	rm ${D}/usr/share/man/man1/faersluskra2timalina.1
 }
