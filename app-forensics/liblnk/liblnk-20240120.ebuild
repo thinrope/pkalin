@@ -18,6 +18,9 @@ IUSE="nls unicode python +threads debug"
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )
 "
+PATCHES=(
+	"${FILESDIR}/${P}.patch" # 60bd81e70b4592078630879c2bf63df787f5ac50
+)
 
 DEPEND="
 	nls? (
@@ -49,6 +52,7 @@ RDEPEND="
 src_prepare() {
 	eautoreconf
 	eapply_user
+	default
 }
 
 src_configure() {
