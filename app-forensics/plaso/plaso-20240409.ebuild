@@ -27,9 +27,6 @@ RESTRICT="!test? ( test )"
 # FIXME: automate this better, from setup.cfg
 # (echo 'RDEPEND="'; for P in $(cat setup.cfg |perl -ne 'chomp; @F=split/ \>\= /; $F[0] =~ s/-*python3-*//; $C{$F[0]}=$F[1]; END{print map {"$_-$C{$_}\n"} keys %C}'); do echo -ne "\t>="; PN=$(echo $P|cut -d- -f1); eix -I -e --format '<installedversions:NAMEVERSION>' --pure-packages $PN |perl -pe 's/\n/ /g'; echo -e "\t\t<--$P"; done | sort) >deps
 
-# MISSING:
-# 	https://pypi.org/project/Flor/
-# 	https://github.com/libyal/libvsapm
 RDEPEND="
 	>=app-forensics/acstore-20240407
 	>=dev-python/artifacts-20220219[${PYTHON_USEDEP}]
@@ -79,7 +76,7 @@ RDEPEND="
 	>=dev-python/pytz-2023.3-r1[${PYTHON_USEDEP}]
 	>=dev-libs/libvhdi-20201014[python]
 	>=dev-libs/libvmdk-20140421[python]
-
+	>=app-forensics/libvsapm-20240226[python ${PYTHON_USEDEP}]
 	>=app-forensics/libvsgpt-20211115[python]
 	>=app-forensics/libvshadow-20160109[python]
 	>=app-forensics/libvslvm-20160109[python]
