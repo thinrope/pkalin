@@ -1,0 +1,12 @@
+diff -Nru a/flor/__init__.py b/flor/__init__.py
+--- a/flor/__init__.py	2020-02-27 13:43:36.000000000 +0100
++++ b/flor/__init__.py	2024-04-10 14:48:02.392631133 +0200
+@@ -2,4 +2,6 @@
+ # Copyright (c) 2016, 2017, DCSO GmbH. All rights reserved.
+ 
+ from .filter import BloomFilter
+-from .fnv import fnv_1, fnv_1a
+\ No newline at end of file
++from .fnv import fnv_1, fnv_1a
++
++__version__ = '1.1.3'

@@ -11,13 +11,16 @@ inherit distutils-r1
 
 DESCRIPTION="A Bloom filter implementation in Python"
 HOMEPAGE="https://github.com/DCSO/flor"
-HASH_COMMIT=${PV}
-SRC_URI="https://github.com/DCSO/${PN}/archive/refs/tags/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/DCSO/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="test"
+
+PATCHES=(
+	${FILESDIR}/${P}.patch
+)
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
