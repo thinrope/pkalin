@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/DCSO/flor"
 HASH_COMMIT=${PV}
 SRC_URI="https://github.com/DCSO/${PN}/archive/refs/tags/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="BSD3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="test"
