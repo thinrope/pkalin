@@ -41,7 +41,7 @@ RDEPEND="
 	>=app-forensics/dfvfs-20240115
 	>=app-forensics/dfwinreg-20240229
 	>=dev-python/dtfabric-20230518[${PYTHON_USEDEP}]
-
+	>=dev-python/flor-1.1.3[${PYTHON_USEDEP}]
 	>=dev-python/lz4-0.10.0[${PYTHON_USEDEP}]
 	>=dev-python/opensearch_py-2.0.1[${PYTHON_USEDEP}]
 	>=dev-python/pefile-2023.2.7[${PYTHON_USEDEP}]
