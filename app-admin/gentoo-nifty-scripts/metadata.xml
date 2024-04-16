@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<longdescription />
 	<maintainer type="person">
 		<email>kalin@thinrope.net</email>
 		<name>Kalin KOZHUHAROV</name>
 	</maintainer>
 	<upstream>
 		<bugs-to>https://github.com/thinrope/gentoo-nifty-scripts/issues</bugs-to>
+		<remote-id type="github">thinrope/gentoo-nifty-scripts</remote-id>
 	</upstream>
-	<use>
-		<flag name="i18n">Add support for non-utf8 encoded ZIP files via <pkg>app-text/convmv</pkg>.</flag>
-	</use>
 </pkgmetadata>
