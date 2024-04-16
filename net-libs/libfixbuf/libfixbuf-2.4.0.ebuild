@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 IUSE="spread +man"
 
 DEPEND="
-	man? ( app-doc/doxygen )
+	man? ( app-text/doxygen )
 	spread? ( net-misc/spread )
 "
 src_configure() {
