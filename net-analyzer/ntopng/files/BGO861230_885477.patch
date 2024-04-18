@@ -1,0 +1,56 @@
+diff --git a/src/LuaEngineNtop.cpp b/src/LuaEngineNtop.cpp
+index 1f2130a83..95005d975 100644
+--- a/src/LuaEngineNtop.cpp
++++ b/src/LuaEngineNtop.cpp
+@@ -5494,12 +5494,12 @@ static int ntop_network_prefix(lua_State* vm) {
+ 
+ /* ****************************************** */
+ 
+-static const char **make_argv(lua_State * vm, int *argc_out, u_int offset, int extra_args) {
+-  const char **argv;
++static char **make_argv(lua_State * vm, int *argc_out, u_int offset, int extra_args) {
++  char **argv;
+   int i;
+   int argc = lua_gettop(vm) + 1 - offset + extra_args;
+ 
+-  if(!(argv = (const char**)calloc(argc, sizeof (char *))))
++  if(!(argv = (char**)calloc(argc, sizeof (char *))))
+     /* raise an error and never return */
+     luaL_error(vm, "Can't allocate memory for arguments array");
+ 
+@@ -5535,7 +5535,7 @@ static const char **make_argv(lua_State * vm, int *argc_out, u_int offset, int e
+ static int ntop_rrd_create(lua_State* vm) {
+   const char *filename;
+   unsigned long pdp_step;
+-  const char **argv;
++  char **argv;
+   int argc, status, offset = 3;
+   time_t start_time = time(NULL)-86400 /* 1 day */;
+ 
+@@ -5558,7 +5558,7 @@ static int ntop_rrd_create(lua_State* vm) {
+   argv = make_argv(vm, &argc, offset, 0);
+ 
+   reset_rrd_state();
+-  status = rrd_create_r(filename, pdp_step, start_time, argc, argv);
++  status = rrd_create_r(filename, pdp_step, start_time, argc, (const char**)argv);
+   free(argv);
+ 
+   if(status != 0) {
+@@ -5690,7 +5690,7 @@ static int ntop_rrd_lastupdate(lua_State* vm) {
+ 
+ static int ntop_rrd_tune(lua_State* vm) {
+   const char *filename;
+-  const char **argv;
++  char **argv;
+   int argc, status, offset = 1;
+   int extra_args = 1; /* Program name arg*/
+ 
+@@ -5706,7 +5706,7 @@ static int ntop_rrd_tune(lua_State* vm) {
+   filename = argv[1];
+ 
+   reset_rrd_state();
+-  status = rrd_tune(argc, (char**)argv);
++  status = rrd_tune(argc, (const char**)argv);
+ 
+   if(status != 0) {
+     char *err = rrd_get_error();
