@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<use>
+		<flag name="ewf">Enable libewf formats support</flag>
+		<flag name="aff">Enable afflib AFFv3 format support</flag>
+	</use>
+</pkgmetadata>
