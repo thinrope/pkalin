@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 inherit autotools python-single-r1
 
 DESCRIPTION="Library for binary signature scanning."
@@ -12,7 +12,7 @@ SRC_URI="https://github.com/libyal/libsigscan/releases/download/${PV}/${PN}-expe
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="amd64"
 IUSE="nls unicode python +threads debug"
 
 REQUIRED_USE="
@@ -55,8 +55,7 @@ src_configure() {
 		$(use_enable debug verbose-output ) \
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
-		$(use_enable python) \
-		$(use_enable python python3) \
+		$(use_enable python)
 
 }
 
