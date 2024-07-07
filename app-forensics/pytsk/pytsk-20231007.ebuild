@@ -1,13 +1,12 @@
-# Copyright 1999-2024 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 DISTUTILS_EXT=1
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} )
 
-DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{10..11} )
 inherit distutils-r1
 
 DESCRIPTION="Python bindings for The Sleuthkit (libtsk)"
@@ -20,7 +19,8 @@ KEYWORDS="~amd64"
 IUSE="aff ewf zlib java debug"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND=">=app-forensics/sleuthkit-4.11[aff=,ewf=,zlib=,java=]
+DEPEND="
+	>=app-forensics/sleuthkit-4.11[aff=,ewf=,zlib=,java=]
 	sys-libs/talloc[python]
 	${PYTHON_DEPS}"
 RDEPEND="${DEPEND}"
