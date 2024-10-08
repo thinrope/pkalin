@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>maintainer-needed@gentoo.org</email>
+  </maintainer>
+  <upstream>
+    <remote-id type="github">Genivia/ugrep</remote-id>
+  </upstream>
+  <use>
+    <flag name="7z">Enable 7z compression support</flag>
+    <flag name="boost">Use the Regex library from boost (USE=pcre is better)</flag>
+    <flag name="bzip3">Enable bzip3 compression support</flag>
+  </use>
+</pkgmetadata>
