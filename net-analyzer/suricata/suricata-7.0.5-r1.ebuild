@@ -6,7 +6,7 @@ EAPI=8
 LUA_COMPAT=( lua5-1 luajit )
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit autotools flag-o-matic linux-info lua-single python-single-r1 systemd tmpfiles verify-sig
+inherit autotools flag-o-matic linux-info lua-single python-single-r1 rust systemd tmpfiles verify-sig
 
 DESCRIPTION="High performance Network IDS, IPS and Network Security Monitoring engine"
 HOMEPAGE="https://suricata.io/"
@@ -27,6 +27,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	lua? ( ${LUA_REQUIRED_USE} )"
 
 RDEPEND="${PYTHON_DEPS}
+	<=dev-util/cbindgen-0.26.0
 	acct-group/suricata
 	acct-user/suricata
 	dev-libs/jansson:=
@@ -39,7 +40,7 @@ RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 	')
-	>=net-libs/libhtp-0.5.46
+	>=net-libs/libhtp-0.5.48
 	net-libs/libpcap
 	sys-apps/file
 	sys-libs/libcap-ng
@@ -56,7 +57,7 @@ RDEPEND="${PYTHON_DEPS}
 	redis?      ( dev-libs/hiredis:= )"
 DEPEND="${RDEPEND}
 	>=dev-build/autoconf-2.69-r5
-	virtual/rust"
+"
 BDEPEND="verify-sig? ( >=sec-keys/openpgp-keys-oisf-20200807 )"
 
 PATCHES=(
@@ -64,7 +65,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.0.7_configure-no-hyperscan-automagic.patch"
 	"${FILESDIR}/${PN}-6.0.0_default-config.patch"
 	"${FILESDIR}/${PN}-7.0.2_configure-no-sphinx-pdflatex-automagic.patch"
-	"${FILESDIR}/${PN}-7.0.3_fix-build-with-gcc14.patch"
+	"${FILESDIR}/${PN}-7.0.5_configure-fortify_source.patch"
 )
 
 pkg_pretend() {
@@ -84,6 +85,11 @@ pkg_pretend() {
 		ERROR_XDP_SOCKETS+="Other eBPF features should work normally."
 		check_extra_config
 	fi
+}
+
+pkg_setup() {
+	python-single-r1_pkg_setup
+	rust_pkg_setup
 }
 
 src_prepare() {
@@ -203,7 +209,7 @@ pkg_postinst() {
 
 	if use bpf; then
 		elog
-		elog "eBPF/XDP files must be compiled (using sys-devel/clang[llvm_targets_BPF]) before use"
+		elog "eBPF/XDP files must be compiled (using llvm-core/clang[llvm_targets_BPF]) before use"
 		elog "because their configuration is hard-coded. You can find the default ones in"
 		elog "    ${EPREFIX}/usr/share/doc/${PF}/ebpf"
 		elog "and the common location for eBPF bytecode is"
