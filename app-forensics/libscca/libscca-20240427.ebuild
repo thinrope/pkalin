@@ -1,14 +1,14 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library and tools to access the Windows Shortcut File (LNK) format"
-HOMEPAGE="https://github.com/libyal/liblnk"
-SRC_URI="https://github.com/libyal/liblnk/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+DESCRIPTION="Library and tools to access the Windows Prefetch File (SCCA) format."
+HOMEPAGE="https://github.com/libyal/libscca"
+SRC_URI="https://github.com/libyal/libscca/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -34,11 +34,11 @@ DEPEND="
 	dev-libs/libcpath[nls=,unicode=]
 	dev-libs/libcsplit[nls=,unicode=]
 	dev-libs/libcthreads[nls=]
+	dev-libs/libfcache[nls=]
+	dev-libs/libfdata[nls=,threads=]
 	dev-libs/libfdatetime[nls=]
-	dev-libs/libfguid[nls=]
-	dev-libs/libfole[nls=]
-	dev-libs/libfwps[nls=,threads=,python=]
-	dev-libs/libfwsi[nls=,threads=,python=]
+	dev-libs/libfvalue[nls=]
+	dev-libs/libfwnt[nls=,threads=,python=]
 	dev-libs/libuna[nls=,unicode=]
 "
 RDEPEND="
@@ -61,7 +61,6 @@ src_configure() {
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
 		$(use_enable python) \
-		$(use_enable python python3) \
 
 }
 

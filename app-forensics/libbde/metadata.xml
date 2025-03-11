@@ -4,6 +4,9 @@
   <maintainer type="person">
     <email>maintainer-wanted@gentoo.org</email>
   </maintainer>
+	<upstream>
+		<remote-id type="github">libyal/libbde</remote-id>
+	</upstream>
   <use>
     <flag name="fuse">Enable FUSE support</flag>
   </use>

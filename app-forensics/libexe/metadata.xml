@@ -5,6 +5,6 @@
     <email>maintainer-wanted@gentoo.org</email>
   </maintainer>
 	<upstream>
-		<remote-id type="github">py4n6/pytsk</remote-id>
+		<remote-id type="github">libyal/libexe</remote-id>
 	</upstream>
 </pkgmetadata>

@@ -1,19 +1,19 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit autotools python-single-r1
 
-DESCRIPTION="Library and tools to access BitLocker Drive Encryption (BDE) encrypted volumes"
-HOMEPAGE="https://github.com/libyal/libbde"
-SRC_URI="https://github.com/libyal/libbde/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
+DESCRIPTION="Library and tools to access the Windows Shortcut File (LNK) format"
+HOMEPAGE="https://github.com/libyal/liblnk"
+SRC_URI="https://github.com/libyal/liblnk/releases/download/${PV}/${PN}-alpha-${PV}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
-IUSE="nls unicode python +fuse +threads debug"
+IUSE="nls unicode python +threads debug"
 
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )
@@ -26,7 +26,6 @@ DEPEND="
 	)
 	python? ( dev-lang/python:* )
 	app-forensics/libbfio[nls=,unicode=,threads=]
-	dev-libs/libcaes[nls=,python=]
 	dev-libs/libcdata[nls=]
 	dev-libs/libcerror[nls=]
 	dev-libs/libcfile[nls=,unicode=]
@@ -35,22 +34,22 @@ DEPEND="
 	dev-libs/libcpath[nls=,unicode=]
 	dev-libs/libcsplit[nls=,unicode=]
 	dev-libs/libcthreads[nls=]
-	dev-libs/libfcache[nls=]
 	dev-libs/libfdatetime[nls=]
 	dev-libs/libfguid[nls=]
-	dev-libs/libfvalue[nls=]
-	dev-libs/libhmac[nls=,unicode=,threads=]
+	dev-libs/libfole[nls=]
+	dev-libs/libfwps[nls=,threads=,python=]
+	dev-libs/libfwsi[nls=,threads=,python=]
 	dev-libs/libuna[nls=,unicode=]
 "
 RDEPEND="
 	${DEPEND}
 	python? ( ${PYTHON_DEPS} )
-	fuse? ( sys-fs/fuse )
 "
 
 src_prepare() {
 	eautoreconf
 	eapply_user
+	default
 }
 
 src_configure() {
@@ -62,10 +61,7 @@ src_configure() {
 		$(use_enable debug verbose-output ) \
 		$(use_enable debug debug-output ) \
 		$(use_enable threads multi-threading-support) \
-		$(use_enable python) \
-		$(use_enable python python3) \
-		$(use_with fuse libfuse) \
-
+		$(use_enable python)
 }
 
 src_install() {

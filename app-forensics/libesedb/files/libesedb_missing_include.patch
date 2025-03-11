@@ -1,0 +1,36 @@
+diff '--color=auto' -Nru A/libesedb/libesedb_multi_value.c B/libesedb/libesedb_multi_value.c
+--- A/libesedb/libesedb_multi_value.c	2024-04-20 14:01:44.000000000 +0200
++++ B/libesedb/libesedb_multi_value.c	2025-03-11 15:42:25.585549701 +0100
+@@ -31,6 +31,8 @@
+ #include "libesedb_multi_value.h"
+ #include "libesedb_types.h"
+ 
++#include "../libfvalue/libfvalue_value.h"
++
+ /* Creates a multi value
+  * Make sure the value multi_value is referencing, is set to NULL
+  * Returns 1 if successful or -1 on error
+diff '--color=auto' -Nru A/libesedb/libesedb_record.c B/libesedb/libesedb_record.c
+--- A/libesedb/libesedb_record.c	2024-04-20 14:01:44.000000000 +0200
++++ B/libesedb/libesedb_record.c	2025-03-11 15:42:49.439346131 +0100
+@@ -44,6 +44,8 @@
+ #include "libesedb_table_definition.h"
+ #include "libesedb_types.h"
+ 
++#include "../libfvalue/libfvalue_value.h"
++
+ /* Creates a record
+  * Make sure the value record is referencing, is set to NULL
+  * Returns 1 if successful or -1 on error
+diff '--color=auto' -Nru A/libesedb/libesedb_value_data_handle.c B/libesedb/libesedb_value_data_handle.c
+--- A/libesedb/libesedb_value_data_handle.c	2024-04-20 14:01:44.000000000 +0200
++++ B/libesedb/libesedb_value_data_handle.c	2025-03-11 15:42:03.036742126 +0100
+@@ -30,6 +30,8 @@
+ #include "libesedb_value_data_handle.h"
+ #include "libesedb_unused.h"
+ 
++#include "../libfvalue/libfvalue_data_handle.h"
++
+ /* Retrieves the number of value entries
+  * Return if successful or -1 on error
+  */
