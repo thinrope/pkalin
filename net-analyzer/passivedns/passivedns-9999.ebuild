@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,9 @@ EGIT_REPO_URI="https://github.com/gamelinux/passivedns"
 
 if [[ ${PV} != *9999 ]] ; then
 	EGIT_COMMIT="${PV}"
-	PATCHES="${FILESDIR}/${PN}-1.2.1_gcc10.patch"
+	PATCHES=(
+		"${FILESDIR}/${PN}-1.2.1_gcc10.patch"
+		"${FILESDIR}/${PN}-1.2.1_pcap-1.9.patch")
 	KEYWORDS="~amd64"
 fi
 
@@ -26,12 +28,7 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	eautoreconf
-	if [[ $(declare -p PATCHES 2>/dev/null) == "declare -a"* ]]; then
-		[[ -n ${PATCHES[@]} ]] && eapply "${PATCHES[@]}"
-	else
-		[[ -n ${PATCHES} ]] && eapply ${PATCHES}
-	fi
-	eapply_user
+	default
 }
 
 src_compile() {

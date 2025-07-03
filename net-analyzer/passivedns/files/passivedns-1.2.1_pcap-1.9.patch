@@ -1,0 +1,27 @@
+--- a/src/passivedns.c	2025-04-29 19:31:15.402946407 +0200
++++ b/src/passivedns.c	2025-04-29 19:32:31.002344684 +0200
+@@ -1489,8 +1489,22 @@
+     }
+     else {
+         /* Look up an available device if non specified */
+-        if (config.dev == 0x0)
+-            config.dev = pcap_lookupdev(config.errbuf);
++        if (config.dev == 0x0) {
++            /* fix for libcap >=1.9, per 
++               https://stackoverflow.com/questions/64401044/pcap-lookupdev-is-deprecated-l-how-to-resolve-it */
++            char *device;
++            pcap_t *handle;
++            pcap_if_t *all_devs;
++
++            if(pcap_findalldevs(&all_devs, config.errbuf) == -1){
++                olog("[*] Error finding devices! %s \n", config.errbuf);
++            }
++
++            if (all_devs == NULL) {
++                olog("[*] Error finding devices: %s\n", config.errbuf);
++            }
++            config.dev = all_devs->name;
++        }
+         olog("[*] Device: %s\n", config.dev);
+ 
+         if ((config.handle = pcap_open_live(config.dev, SNAPLENGTH, config.promisc, 500,
