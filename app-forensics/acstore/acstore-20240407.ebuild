@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -31,7 +31,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-distutils_enable_tests setup.py
+distutils_enable_tests unittest
 
 src_prepare() {
 	sed -i -e "s#share/doc/${PN}#share/doc/${PF}#;" setup.py || die

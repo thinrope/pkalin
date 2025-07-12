@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,11 +20,11 @@ IUSE="aff ewf zlib java debug"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="
-	>=app-forensics/sleuthkit-4.11[aff=,ewf=,zlib=,java=]
+	>=app-forensics/sleuthkit-4.13[aff=,ewf=,zlib=,java=]
 	sys-libs/talloc[python]
 	${PYTHON_DEPS}"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}3-${PV}"
 
-distutils_enable_tests setup.py
+distutils_enable_tests unittest

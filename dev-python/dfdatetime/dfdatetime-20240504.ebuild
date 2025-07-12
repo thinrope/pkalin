@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,10 +9,10 @@ PYTHON_COMPAT=( python3_{10..12} )
 
 inherit distutils-r1
 
-DESCRIPTION="A stand-alone implementation to read and write Attribute Container stores"
-HOMEPAGE="https://github.com/log2timeline/acstore"
+DESCRIPTION="Digital Forensics date and time"
+HOMEPAGE="https://github.com/log2timeline/dfdatetime"
 HASH_COMMIT=${PV}
-SRC_URI="https://github.com/log2timeline/acstore/archive/refs/tags/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/log2timeline/dfdatetime/archive/refs/tags/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -21,7 +21,6 @@ IUSE="test"
 
 RDEPEND="
 	>=dev-python/pip-7.0.0[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-3.10[${PYTHON_USEDEP}]
 	test? (
 		>=dev-python/mock-2.0.0
 		>=dev-python/pbr-4.2.0
@@ -31,7 +30,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-distutils_enable_tests setup.py
+distutils_enable_tests unittest
 
 src_prepare() {
 	sed -i -e "s#share/doc/${PN}#share/doc/${PF}#;" setup.py || die

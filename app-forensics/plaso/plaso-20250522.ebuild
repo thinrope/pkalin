@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -28,70 +28,69 @@ RESTRICT="!test? ( test )"
 # (echo 'RDEPEND="'; for P in $(cat setup.cfg |perl -ne 'chomp; @F=split/ \>\= /; $F[0] =~ s/-*python3-*//; $C{$F[0]}=$F[1]; END{print map {"$_-$C{$_}\n"} keys %C}'); do echo -ne "\t>="; PN=$(echo $P|cut -d- -f1); eix -I -e --format '<installedversions:NAMEVERSION>' --pure-packages $PN |perl -pe 's/\n/ /g'; echo -e "\t\t<--$P"; done | sort) >deps
 
 RDEPEND="
-	<dev-python/pyparsing-3.1.0
-	>=app-forensics/acstore-20230519
-	>=app-forensics/dfvfs-20230407
-	>=app-forensics/dfwinreg-20211207
+	>=app-forensics/acstore-20240407
+	>=dev-python/artifacts-20220219[${PYTHON_USEDEP}]
+	>=dev-python/bencode_py-4.0.0[${PYTHON_USEDEP}]
+	>=dev-python/certifi-3021.3.16-r3[${PYTHON_USEDEP}]
+	>=dev-python/python-dateutil-1.5[${PYTHON_USEDEP}]
+	>=dev-python/defusedxml-0.5.0[${PYTHON_USEDEP}]
+	>=dev-python/dfdatetime-20240330[${PYTHON_USEDEP}]
+	>=app-forensics/dfvfs-20240115
+	>=app-forensics/dfwinreg-20240229
+	>=dev-python/dtfabric-20230518[${PYTHON_USEDEP}]
+	>=dev-python/flor-1.1.3[${PYTHON_USEDEP}]
+	>=dev-python/lz4-0.10.0[${PYTHON_USEDEP}]
+	>=dev-python/opensearch_py-2.0.1[${PYTHON_USEDEP}]
+	>=dev-python/pefile-2023.2.7[${PYTHON_USEDEP}]
+	>=dev-python/psutil-5.4.3[${PYTHON_USEDEP}]
 	>=app-forensics/libbde-20220121[python]
+	>=dev-libs/libcaes-20221127[python]
+	>=dev-libs/libcreg-20200725[python]
 	>=app-forensics/libesedb-20220806[python]
 	>=app-forensics/libevt-20191104[python]
 	>=app-forensics/libevtx-20220724[python]
 	>=app-forensics/libewf-20131210
-	>=app-forensics/libfsapfs-20201107[python]
-	>=app-forensics/libfsext-20220112[python]
-	>=app-forensics/libfsfat-20220816[python]
-	>=app-forensics/libfshfs-20220115[python]
+	>=dev-libs/libfcrypto-20240114[python]
+	>=app-forensics/libfsapfs-20220709[python]
+	>=app-forensics/libfsext-20220829[python]
+	>=app-forensics/libfsfat-20220925[python]
+	>=app-forensics/libfshfs-20220831[python]
 	>=app-forensics/libfsntfs-20211229[python]
-	>=app-forensics/libfsxfs-20220113[python]
+	>=app-forensics/libfsxfs-20220829[python]
 	>=app-forensics/libfvde-20220121[python]
-	>=app-forensics/liblnk-20230205[python]
+	>=dev-libs/libfwnt-20210717[python]
+	>=dev-libs/libfwsi-20240225[python]
+	>=app-forensics/liblnk-20230716[python]
 	>=app-forensics/libluksde-20220121[python]
 	>=app-forensics/libmodi-20210405[python]
 	>=app-forensics/libmsiecf-20150314[python]
 	>=app-forensics/libolecf-20151223[python]
-	>=app-forensics/libphdi-20220110[python]
+	>=dev-python/pyparsing-3.0.0[${PYTHON_USEDEP}]
+	>=app-forensics/libphdi-20220228[python]
 	>=app-forensics/libqcow-20201213[python]
 	>=app-forensics/libregf-20201002[python]
 	>=app-forensics/libscca-20190605[python]
+	>=dev-libs/libsigscan-20230109[python]
 	>=app-forensics/libsmraw-20140612[python]
+	>=app-forensics/pytsk-20210419[${PYTHON_USEDEP}]
+	>=dev-python/pytz-2023.3-r1[${PYTHON_USEDEP}]
+	>=dev-libs/libvhdi-20201014[python]
+	>=dev-libs/libvmdk-20140421[python]
+	>=app-forensics/libvsapm-20240226[python]
 	>=app-forensics/libvsgpt-20211115[python]
 	>=app-forensics/libvshadow-20160109[python]
 	>=app-forensics/libvslvm-20160109[python]
-	>=app-forensics/pytsk-20210419[${PYTHON_USEDEP}]
-	>=dev-libs/libcaes-20221127[python]
-	>=dev-libs/libcreg-20200725[python]
-	>=dev-libs/libfwnt-20210717[python]
-	>=dev-libs/libfwsi-20150606[python]
-	>=dev-libs/libsigscan-20230109[python]
-	>=dev-libs/libsmdev-20140529[python]
-	>=dev-libs/libvhdi-20201014[python]
-	>=dev-libs/libvmdk-20140421[python]
-	>=dev-python/artifacts-20220219[${PYTHON_USEDEP}]
-	>=dev-python/bencode_py-4.0.0[${PYTHON_USEDEP}]
-	>=dev-python/certifi-3021.3.16-r3[${PYTHON_USEDEP}]
-	>=dev-python/cffi-1.9.1[${PYTHON_USEDEP}]
-	>=dev-python/cryptography-2.0.2[${PYTHON_USEDEP}]
-	>=dev-python/defusedxml-0.5.0[${PYTHON_USEDEP}]
-	>=dev-python/dfdatetime-20221112[${PYTHON_USEDEP}]
-	>=dev-python/dtfabric-20230518[${PYTHON_USEDEP}]
-	>=dev-python/future-0.16.0[${PYTHON_USEDEP}]
-	>=dev-python/idna-2.5[${PYTHON_USEDEP}]
-	>=dev-python/lz4-0.10.0[${PYTHON_USEDEP}]
-	>=dev-python/opensearch_py-2.0.1[${PYTHON_USEDEP}]
-	>=dev-python/pefile-2021.5.24[${PYTHON_USEDEP}]
-	>=dev-python/psutil-5.4.3[${PYTHON_USEDEP}]
-	>=dev-python/pyparsing-2.4.2[${PYTHON_USEDEP}]
-	>=dev-python/python-dateutil-1.5[${PYTHON_USEDEP}]
-	>=dev-python/pytz-2023.3-r1[${PYTHON_USEDEP}]
-	>=dev-python/pyxattr-0.7.2[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-3.10[${PYTHON_USEDEP}]
-	>=dev-python/pyzmq-2.1.11[${PYTHON_USEDEP}]
 	>=dev-python/redis-3.4[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.18.0[${PYTHON_USEDEP}]
 	>=dev-python/six-1.1.0[${PYTHON_USEDEP}]
 	>=dev-python/urllib3-1.21.1[${PYTHON_USEDEP}]
+	>=dev-python/pyxattr-0.7.2[${PYTHON_USEDEP}]
 	>=dev-python/xlsxwriter-0.9.3[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-3.10[${PYTHON_USEDEP}]
 	>=dev-python/yara-python-3.4.0[${PYTHON_USEDEP}]
+	>=dev-python/pyzmq-2.1.11[${PYTHON_USEDEP}]
+	>=dev-python/zstd-1.3.0.2[${PYTHON_USEDEP}]
+	>=dev-libs/libsmdev-20140529[python]
 	${PYTHON_DEPS}
 	test? (
 		>=dev-python/fakeredis-1.4.1[${PYTHON_USEDEP}]
@@ -102,7 +101,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-distutils_enable_tests setup.py
+distutils_enable_tests unittest
 
 src_prepare() {
 	sed -i -e "s#share/doc/${PN}#share/doc/${P}#;" setup.py || die
