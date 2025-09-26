@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="8"
@@ -14,12 +14,16 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND="
 	>=app-admin/perl-cleaner-2.31
 	>=app-arch/p7zip-17.05-r1
+	>=app-crypt/md5deep-4.4
+	>=app-misc/colordiff-1.0.21
 	>=app-portage/eix-0.36.7
 	>=app-text/convmv-2.05-r1
-	>=sys-apps/coreutils-9.4-r1
-	>=sys-apps/pv-1.8.5
-	>=sys-apps/util-linux-2.39.3-r7
-	>=sys-devel/bc-1.07.1-r6
+	>=sys-apps/coreutils-9.7
+	>=sys-apps/hdparm-9.65-r2
+	>=sys-apps/pv-1.8.12
+	>=sys-apps/smartmontools-7.4-r1
+	>=sys-apps/util-linux-2.41.1-r1
+	>=sys-devel/bc-1.08.2
 	>=sys-libs/glibc-2.38-r11
 "
 
