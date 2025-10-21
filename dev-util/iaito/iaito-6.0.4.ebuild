@@ -7,27 +7,26 @@ inherit meson xdg-utils
 
 DESCRIPTION="A Qt and C++ GUI for radare2 reverse engineering framework"
 HOMEPAGE="https://github.com/radareorg/iaito"
-SRC_URI="
-	https://github.com/radareorg/iaito/archive/refs/tags/${PV/_/-}.tar.gz -> ${P}.tar.gz
-"
+SRC_URI="https://github.com/radareorg/iaito/archive/refs/tags/${PV/_/-}.tar.gz
+	-> ${P}.tar.gz"
+
 S="${WORKDIR}/${PN}-${PV/_/-}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
+# NOTE: it can work also with qt5, but hopefully noone needs that!
 DEPEND="
-	dev-qt/qtcore:5
-	dev-qt/qtgui:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtsvg:5
-	dev-qt/qtwidgets:5
-	=dev-util/radare2-5.9*
+	dev-qt/qtbase:6[network,widgets,gui]
+	dev-qt/qtsvg:6
+	dev-util/radare2
 "
 RDEPEND="${DEPEND}"
-EMESON_SOURCE="${S}/src"
 
+EMESON_SOURCE="${S}/src"
 src_configure() {
+	local emesonargs="-Dwith_qt6=true"
 	meson_src_configure
 }
 
