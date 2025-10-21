@@ -72,7 +72,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=true
-		-DBUILD_STATIC_LIBS=false
+		-DBUILD_STATIC_LIBS="$(usex static-libs)"
 		-DCAPSTONE_BUILD_TESTS="$(usex test)"
 	)
 	cmake_src_configure
