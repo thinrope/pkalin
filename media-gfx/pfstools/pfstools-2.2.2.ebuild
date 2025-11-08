@@ -1,17 +1,17 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 inherit cmake
 
 DESCRIPTION="A set of command line programs for reading, writing and manipulating HDR images"
 HOMEPAGE="http://pfstools.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tgz"
+SRC_URI="https://github.com/sommerbe/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${PN}.tar.gz"
 
-LICENSE="LGPL-2.1"
+LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="debug qt netpbm octave openexr tiff"
 
 RDEPEND="
