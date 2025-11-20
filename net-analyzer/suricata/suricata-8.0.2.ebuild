@@ -1,12 +1,11 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-LUA_COMPAT=( lua5-1 luajit )
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{12..13} )
 
-inherit autotools flag-o-matic linux-info lua-single python-single-r1 rust systemd tmpfiles verify-sig
+inherit autotools flag-o-matic linux-info python-single-r1 rust systemd tmpfiles verify-sig
 
 DESCRIPTION="High performance Network IDS, IPS and Network Security Monitoring engine"
 HOMEPAGE="https://suricata.io/"
@@ -16,22 +15,23 @@ SRC_URI="https://www.openinfosecfoundation.org/download/${P}.tar.gz
 LICENSE="GPL-2"
 SLOT="0/7"
 KEYWORDS="~amd64"
-IUSE="+af-packet af-xdp bpf control-socket cuda debug +detection geoip hardened hyperscan lua lz4 nflog +nfqueue pfring redis systemd test"
+IUSE="+af-packet af-xdp bpf control-socket debug +detection geoip hardened ndpi nflog +nfqueue pfring redis systemd test"
 VERIFY_SIG_OPENPGP_KEY_PATH="/usr/share/openpgp-keys/openinfosecfoundation.org.asc"
 
 RESTRICT="!test? ( test )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	af-xdp? ( bpf )
-	bpf? ( af-packet )
-	lua? ( ${LUA_REQUIRED_USE} )"
+	bpf? ( af-packet )"
+
+S="${WORKDIR}/${PN}-${PV}"
 
 RDEPEND="${PYTHON_DEPS}
-	<=dev-util/cbindgen-0.26.0
+	>=dev-util/cbindgen-0.26.0
 	acct-group/suricata
 	acct-user/suricata
 	dev-libs/jansson:=
-	dev-libs/libpcre2
+	dev-libs/libpcre2:=
 	dev-libs/libyaml
 	net-libs/libnet:*
 	net-libs/libnfnetlink
@@ -40,32 +40,26 @@ RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 	')
-	>=net-libs/libhtp-0.5.48
+	>=net-libs/libhtp-0.5.50
 	net-libs/libpcap
 	sys-apps/file
 	sys-libs/libcap-ng
-	af-xdp?		( net-libs/xdp-tools )
-	bpf?        ( dev-libs/libbpf )
-	cuda?       ( dev-util/nvidia-cuda-toolkit )
-	geoip?      ( dev-libs/libmaxminddb:= )
-	hyperscan?  ( dev-libs/vectorscan:= )
-	lua?        ( ${LUA_DEPS} )
-	lz4?        ( app-arch/lz4 )
-	nflog?      ( net-libs/libnetfilter_log )
-	nfqueue?    ( net-libs/libnetfilter_queue )
-	pfring?     ( net-libs/libpfring )
-	redis?      ( dev-libs/hiredis:= )"
+	sys-libs/zlib
+	af-xdp? ( net-libs/xdp-tools )
+	bpf? ( dev-libs/libbpf:= )
+	geoip? ( dev-libs/libmaxminddb:= )
+	ndpi? ( net-libs/nDPI )
+	nflog? ( net-libs/libnetfilter_log )
+	nfqueue? ( net-libs/libnetfilter_queue )
+	pfring? ( net-libs/libpfring )
+	redis? ( dev-libs/hiredis:= )"
 DEPEND="${RDEPEND}
 	>=dev-build/autoconf-2.69-r5
 "
 BDEPEND="verify-sig? ( >=sec-keys/openpgp-keys-oisf-20200807 )"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-5.0.1_configure-no-lz4-automagic.patch"
-	"${FILESDIR}/${PN}-5.0.7_configure-no-hyperscan-automagic.patch"
-	"${FILESDIR}/${PN}-6.0.0_default-config.patch"
-	"${FILESDIR}/${PN}-7.0.2_configure-no-sphinx-pdflatex-automagic.patch"
-	"${FILESDIR}/${PN}-7.0.5_configure-fortify_source.patch"
+	"${FILESDIR}/${PN}-7.0.10_fix_pfring.patch"
 )
 
 pkg_pretend() {
@@ -101,11 +95,10 @@ src_prepare() {
 src_configure() {
 	# Bug #861242
 	filter-lto
-
+	#hwloc unix-socket windivert dpdk netmap bpf-build dag libmagic napatech ja3 ja4 ndpi
 	local myeconfargs=(
 		"--localstatedir=/var" \
 		"--runstatedir=/run" \
-		"--enable-non-bundled-htp" \
 		"--enable-gccmarch-native=no" \
 		"--enable-python" \
 		$(use_enable af-packet) \
@@ -113,39 +106,30 @@ src_configure() {
 		$(use_enable bpf ebpf) \
 		$(use_enable pfring pfring) \
 		$(use_enable control-socket unix-socket) \
-		$(use_enable cuda) \
 		$(use_enable detection) \
 		$(use_enable geoip) \
 		$(use_enable hardened gccprotect) \
 		$(use_enable hardened pie) \
-		$(use_enable hyperscan) \
-		$(use_enable lz4) \
+		$(use_enable ndpi) \
 		$(use_enable nflog) \
 		$(use_enable nfqueue) \
 		$(use_enable redis hiredis) \
 		$(use_enable test unittests) \
 		"--disable-coccinelle"
 	)
-	if use lua; then
-		if use lua_single_target_luajit; then
-			myeconfargs+=( --enable-luajit )
-		else
-			myeconfargs+=( --enable-lua )
-		fi
-	fi
 
 	if use pfring ; then
 		append-cppflags -DHAVE_PFRING_OPEN_NEW
 		append-libs -lrt
+		CFLAGS="-D_GNU_SOURCE"
 	fi
 	if use debug; then
 		myeconfargs+=( $(use_enable debug) )
 		# so we can get a backtrace according to "reporting bugs" on upstream web site
 		QA_FLAGS_IGNORED="usr/bin/${PN}"
-		CFLAGS="-ggdb -O0" econf ${myeconfargs[@]}
-	else
-		econf ${myeconfargs[@]}
+		CFLAGS="-ggdb -O0"
 	fi
+	econf ${myeconfargs[@]}
 }
 
 src_install() {
@@ -155,7 +139,7 @@ src_install() {
 	python_fix_shebang "${ED}"/usr/bin/
 
 	if use bpf; then
-		rm -f ebpf/Makefile.{am,in} || die
+		rm ebpf/Makefile.{am,in} || die
 		dodoc -r ebpf/
 		keepdir /usr/libexec/suricata/ebpf
 	fi

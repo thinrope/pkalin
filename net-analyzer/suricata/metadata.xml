@@ -14,9 +14,10 @@
     <flag name="detection">Enable detection modules</flag>
     <flag name="hyperscan">Enable high-performance regex matching with Hyperscan</flag>
     <flag name="lz4">Enable support for compressed pcap logging using the LZ4 algorithm</flag>
+	<flag name="ndpi">Enable deep packet inspection via <pkg>net-libs/nDPI</pkg></flag>
     <flag name="nflog">Enable libnetfilter_log support</flag>
     <flag name="nfqueue">Enable NFQUEUE support for inline IDP</flag>
-    <flag name="pfring">Enable PF_RING support(<pkg>net-libs/libpfring</pkg>)</flag>
+    <flag name="pfring">Enable PF_RING support via <pkg>net-libs/libpfring</pkg></flag>
     <flag name="redis">Enable Redis support</flag>
   </use>
 </pkgmetadata>

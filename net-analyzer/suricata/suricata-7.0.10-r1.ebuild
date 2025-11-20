@@ -1,10 +1,10 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 LUA_COMPAT=( lua5-1 luajit )
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{10..13} )
 
 inherit autotools flag-o-matic linux-info lua-single python-single-r1 rust systemd tmpfiles verify-sig
 
@@ -26,12 +26,13 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	bpf? ( af-packet )
 	lua? ( ${LUA_REQUIRED_USE} )"
 
+# TODO: add ja3, ja4
 RDEPEND="${PYTHON_DEPS}
-	<=dev-util/cbindgen-0.26.0
+	>=dev-util/cbindgen-0.26.0
 	acct-group/suricata
 	acct-user/suricata
 	dev-libs/jansson:=
-	dev-libs/libpcre2
+	dev-libs/libpcre2:=
 	dev-libs/libyaml
 	net-libs/libnet:*
 	net-libs/libnfnetlink
@@ -40,21 +41,22 @@ RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 	')
-	>=net-libs/libhtp-0.5.48
+	>=net-libs/libhtp-0.5.50
 	net-libs/libpcap
 	sys-apps/file
 	sys-libs/libcap-ng
-	af-xdp?		( net-libs/xdp-tools )
-	bpf?        ( dev-libs/libbpf )
-	cuda?       ( dev-util/nvidia-cuda-toolkit )
-	geoip?      ( dev-libs/libmaxminddb:= )
-	hyperscan?  ( dev-libs/vectorscan:= )
-	lua?        ( ${LUA_DEPS} )
-	lz4?        ( app-arch/lz4 )
-	nflog?      ( net-libs/libnetfilter_log )
-	nfqueue?    ( net-libs/libnetfilter_queue )
-	pfring?     ( net-libs/libpfring )
-	redis?      ( dev-libs/hiredis:= )"
+	sys-libs/zlib
+	af-xdp? ( net-libs/xdp-tools )
+	bpf? ( dev-libs/libbpf:= )
+	cuda? ( dev-util/nvidia-cuda-toolkit )
+	geoip? ( dev-libs/libmaxminddb:= )
+	hyperscan? ( dev-libs/vectorscan:= )
+	lua? ( ${LUA_DEPS} )
+	lz4? ( app-arch/lz4:= )
+	nflog? ( net-libs/libnetfilter_log )
+	nfqueue? ( net-libs/libnetfilter_queue )
+	pfring? ( net-libs/libpfring )
+	redis? ( dev-libs/hiredis:= )"
 DEPEND="${RDEPEND}
 	>=dev-build/autoconf-2.69-r5
 "
@@ -66,6 +68,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.0.0_default-config.patch"
 	"${FILESDIR}/${PN}-7.0.2_configure-no-sphinx-pdflatex-automagic.patch"
 	"${FILESDIR}/${PN}-7.0.5_configure-fortify_source.patch"
+	"${FILESDIR}/${PN}-7.0.10_fix_pfring.patch"
 )
 
 pkg_pretend() {
@@ -137,15 +140,15 @@ src_configure() {
 	if use pfring ; then
 		append-cppflags -DHAVE_PFRING_OPEN_NEW
 		append-libs -lrt
+		CFLAGS="-D_GNU_SOURCE"
 	fi
 	if use debug; then
 		myeconfargs+=( $(use_enable debug) )
 		# so we can get a backtrace according to "reporting bugs" on upstream web site
 		QA_FLAGS_IGNORED="usr/bin/${PN}"
-		CFLAGS="-ggdb -O0" econf ${myeconfargs[@]}
-	else
-		econf ${myeconfargs[@]}
+		CFLAGS="-ggdb -O0"
 	fi
+	econf ${myeconfargs[@]}
 }
 
 src_install() {
@@ -155,7 +158,7 @@ src_install() {
 	python_fix_shebang "${ED}"/usr/bin/
 
 	if use bpf; then
-		rm -f ebpf/Makefile.{am,in} || die
+		rm ebpf/Makefile.{am,in} || die
 		dodoc -r ebpf/
 		keepdir /usr/libexec/suricata/ebpf
 	fi
