@@ -6,8 +6,9 @@ inherit git-r3 qmake-utils
 
 DESCRIPTION="Software used to analyze data from CPAP machines"
 HOMEPAGE="https://www.sleepfiles.com/OSCAR/"
+
 EGIT_REPO_URI="https://gitlab.com/CrimsonNape/OSCAR-code.git"
-EGIT_TAG="v${PV}"
+EGIT_COMMIT="v${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -15,7 +15,7 @@ SLOT="0"
 
 KEYWORDS="~amd64"
 
-IUSE="debug +qt5 qt6"
+IUSE="debug qt5 +qt6"
 REQUIRED_USE="^^ ( qt5 qt6 )"
 
 DEPEND="
