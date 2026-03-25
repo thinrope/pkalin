@@ -1,7 +1,7 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Tool for managing windows's LDM partitions"
 HOMEPAGE="https://github.com/mdbooth/libldm"
@@ -20,8 +20,12 @@ DEPEND="
 	sys-fs/lvm2"
 
 inherit autotools flag-o-matic
+PATCHES=(
+	"${FILESDIR}/${P}_f0321d8.patch"
+)
 
 src_prepare() {
+	default
 	# Remove problematic LDFLAGS declaration
 	sed -i -e 's/ -Werror//g' src/Makefile.am || die
 	eautoreconf
