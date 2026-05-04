@@ -1,0 +1,11 @@
+--- A/src/readpst.c	2026-05-04 15:50:18.733402399 +0200
++++ B/src/readpst.c	2026-05-04 15:52:34.213931662 +0200
+@@ -26,7 +26,7 @@
+     int32_t skip_count;
+ };
+ 
+-int       grim_reaper();
++int       grim_reaper(int waitall);
+ pid_t     try_fork(char* folder);
+ void      process(pst_item *outeritem, pst_desc_tree *d_ptr);
+ void      write_email_body(FILE *f, char *body);

@@ -1,9 +1,9 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{11..14} )
 
 inherit autotools python-single-r1
 
@@ -29,12 +29,14 @@ DEPEND="${RDEPEND}
 	virtual/libiconv
 	virtual/pkgconfig
 	dii? ( media-libs/gd[png] )"
+PATCHES=""${FILESDIR}"/${P}-fix-grim_reaper.patch"
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
 
 src_prepare() {
+	default
 	# conditionally install the extra documentation
 	if ! use doc; then
 		sed -i -e "/SUBDIRS/s: html::" Makefile.am || die
