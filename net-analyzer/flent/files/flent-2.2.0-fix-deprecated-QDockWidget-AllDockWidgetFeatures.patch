@@ -1,0 +1,43 @@
+From a4bcbf2744576412b95bf2bf24d0bc9476cc4f3e Mon Sep 17 00:00:00 2001
+From: Kalin KOZHUHAROV <me.kalin@gmail.com>
+Date: Fri, 15 May 2026 08:59:50 +0200
+Subject: [PATCH] fix deprecated QDockWidget::AllDockWidgetFeatures
+
+QDockWidget::AllDockWidgetFeatures has been deprecated in Qt5 and
+missing in Qt6, it can be replaced by
+DockWidgetClosable|DockWidgetMovable|DockWidgetFloatable without
+side-effects.
+
+Reference:
+  https://doc.qt.io/archives/qt-5.15/qdockwidget.html#DockWidgetFeature-enum
+  https://doc.qt.io/qt-6/qdockwidget.html#DockWidgetFeature-enum
+
+This may be enough to allow running flent-gui under pyqt6 :-)
+
+$ flent-gui
+Starting Flent 2.2.0 using Python 3.13.12.
+Initialised matplotlib v3.10.8 on numpy v2.4.4.
+GUI loaded. Using Qt through pyqt6 v6.10.3.
+
+Signed-off-by: Kalin KOZHUHAROV <kalin@thinrope.net>
+Signed-off-by: Kalin KOZHUHAROV <me.kalin@gmail.com>
+---
+ flent/ui/mainwindow.ui | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/flent/ui/mainwindow.ui b/flent/ui/mainwindow.ui
+index 6e2c59c..00115b8 100644
+--- a/flent/ui/mainwindow.ui
++++ b/flent/ui/mainwindow.ui
+@@ -212,7 +212,7 @@
+   <widget class="QStatusBar" name="statusbar"/>
+   <widget class="QDockWidget" name="plotDock">
+    <property name="features">
+-    <set>QDockWidget::AllDockWidgetFeatures</set>
++    <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable</set>
+    </property>
+    <property name="windowTitle">
+     <string>Sele&amp;ct plot</string>
+-- 
+2.53.0
+
