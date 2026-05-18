@@ -34,6 +34,10 @@ RDEPEND="${PYTHON_DEPS}
 "
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 
-DOCS=( BUGS CHANGES.md README.rst batchfile.example flent-paper.batch flentrc.example misc/ )
 
 distutils_enable_tests unittest
+
+src_prepare () {
+	default
+	sed -i -e "s#share/doc/${PN}#share/doc/${PF}#g" setup.py || die "Sed failed!"
+}
