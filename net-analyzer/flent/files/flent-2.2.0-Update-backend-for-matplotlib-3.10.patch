@@ -1,0 +1,35 @@
+From cb719203f43079538a948dbd91ae1da49904d3e5 Mon Sep 17 00:00:00 2001
+From: Kalin KOZHUHAROV <me.kalin@gmail.com>
+Date: Mon, 18 May 2026 13:04:26 +0200
+Subject: [PATCH 1/2] flent/gui.py:	Update backend for matplotlib-3.10
+
+Based on https://matplotlib.org/stable/api/backend_qt_api.html, use the
+new combinet (Qt6/Qt5) backend.
+
+NOTE: This will bump the dependency version to >=matplotlib-3.5.3, where
+this combined backend was introduced first.
+
+Signed-off-by: Kalin KOZHUHAROV <me.kalin@gmail.com>
+---
+ flent/gui.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/flent/gui.py b/flent/gui.py
+index 88563ec..02a8a43 100644
+--- a/flent/gui.py
++++ b/flent/gui.py
+@@ -86,9 +86,9 @@ try:
+ 
+     from qtpy.QtNetwork import QLocalSocket, QLocalServer
+ 
+-    from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg \
++    from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg \
+         as FigureCanvas
+-    from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT \
++    from matplotlib.backends.backend_qtagg import NavigationToolbar2QT \
+         as NavigationToolbar
+ 
+ except ImportError as e:
+-- 
+2.53.0
+

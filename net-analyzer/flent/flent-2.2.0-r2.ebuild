@@ -15,15 +15,19 @@ SRC_URI="https://github.com/tohojo/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+gui +plots"
+IUSE="+gui"
 
-PATCHES="${FILESDIR}/${P}-fix-deprecated-QDockWidget-AllDockWidgetFeatures.patch"
+PATCHES="
+	${FILESDIR}/${P}-fix-deprecated-QDockWidget-AllDockWidgetFeatures.patch
+	${FILESDIR}/${P}-Update-backend-for-matplotlib-3.10.patch
+"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
-	plots? ( dev-python/matplotlib[${PYTHON_USEDEP}] )
-	gui? ( dev-python/pyqt6[${PYTHON_USEDEP}] )
+	gui? (
+		>=dev-python/matplotlib-3.10.0[${PYTHON_USEDEP}]
+		dev-python/pyqt6[${PYTHON_USEDEP}] )
 	net-analyzer/netperf[demo]
 	net-misc/iperf
 	net-analyzer/fping
