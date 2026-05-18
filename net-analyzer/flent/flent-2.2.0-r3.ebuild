@@ -33,3 +33,7 @@ RDEPEND="${PYTHON_DEPS}
 	net-analyzer/fping
 "
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
+
+DOCS=( BUGS CHANGES.md README.rst batchfile.example flent-paper.batch flentrc.example misc/ )
+
+distutils_enable_tests unittest
