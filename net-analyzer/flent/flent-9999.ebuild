@@ -6,21 +6,16 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
 
 DISTUTILS_USE_PEP517=setuptools
-inherit distutils-r1 xdg
+inherit distutils-r1 xdg git-r3
 
 DESCRIPTION="The FLExible Network Tester"
 HOMEPAGE="https://flent.org/"
-SRC_URI="https://github.com/tohojo/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/tohojo/${PN}"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+gui"
-
-PATCHES="
-	${FILESDIR}/${P}-fix-deprecated-QDockWidget-AllDockWidgetFeatures.patch
-	${FILESDIR}/${P}-Update-backend-for-matplotlib-3.10.patch
-"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
