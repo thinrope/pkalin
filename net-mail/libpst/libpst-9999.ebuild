@@ -30,13 +30,10 @@ DEPEND="${RDEPEND}
 	virtual/libiconv
 	virtual/pkgconfig
 	dii? ( media-libs/gd[png] )"
-PATCHES=(
-	"${FILESDIR}"/lspst.1.patch
-	"${FILESDIR}"/readpst.1.patch
-	"${FILESDIR}"/pst2dii.1.patch
-	"${FILESDIR}"/pst2ldif.1.patch
-	"${FILESDIR}"/outlook.pst.5.patch)
-
+BDEPEND="
+	app-text/xmlto
+	app-text/doxygen
+"
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
@@ -46,6 +43,8 @@ src_prepare() {
 	# conditionally install the extra documentation
 	if ! use doc; then
 		sed -i -e "/SUBDIRS/s: html::" Makefile.am || die
+	else
+		sed -i -e "s#@PACKAGE@-@VERSION@#${PF}#g" html/Makefile.am || die
 	fi
 
 	# don't install duplicate docs
@@ -66,6 +65,11 @@ src_configure() {
 		$(use_enable python) \
 		$(use_enable static-libs static) \
 		$(use_with python boost-python "boost_${EPYTHON/./}")
+}
+
+src_compile() {
+	emake -C xml
+	default
 }
 
 src_install() {
