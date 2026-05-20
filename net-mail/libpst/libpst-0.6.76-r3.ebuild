@@ -13,13 +13,13 @@ SRC_URI="https://www.five-ten-sg.com/${PN}/packages/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64"
 IUSE="debug dii doc python static-libs"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="
 	gnome-extra/libgsf:=
-	sys-libs/zlib
+	virtual/zlib
 	dii? ( media-gfx/imagemagick:=[png] )
 	python? (
 		${PYTHON_DEPS}
@@ -29,7 +29,8 @@ DEPEND="${RDEPEND}
 	virtual/libiconv
 	virtual/pkgconfig
 	dii? ( media-libs/gd[png] )"
-PATCHES=""${FILESDIR}"/${P}-fix-grim_reaper.patch"
+PATCHES=(
+	"${FILESDIR}"/"${P}"-fix-grim_reaper.patch)
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup

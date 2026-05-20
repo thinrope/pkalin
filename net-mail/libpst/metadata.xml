@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<!-- maintainer-needed -->
+	<maintainer type="person" proxied="yes">
+		<name>Kalin KOZHUHAROV</name>
+		<email>kalin@thinrope.net</email>
+	</maintainer>
 	<upstream>
+		<remote-id type="github">pst-format/libpst</remote-id>
 		<doc>https://www.five-ten-sg.com/libpst/</doc>
-	</upstream>
+		</upstream>
+	<use>
+		<flag name="dii">Add support for Summation DDI load files</flag>
+	</use>
 </pkgmetadata>
