@@ -1,0 +1,15 @@
+--- a/cMake/FindPyCXX.cmake
++++ b/cMake/FindPyCXX.cmake
+@@ -22,12 +22,6 @@
+ 
+ set(PYCXX_FOUND "YES")
+ 
+-if(FREECAD_USE_EXTERNAL_PYCXX)
+-    find_package(PkgConfig)
+-    pkg_check_modules(PyCXX REQUIRED PyCXX)
+-    pkg_get_variable(PYCXX_SOURCE_DIR PyCXX srcdir)
+-endif(FREECAD_USE_EXTERNAL_PYCXX)
+-
+ # find the header directory
+ if(PYCXX_INCLUDE_DIRS)
+     # headers better be in there
