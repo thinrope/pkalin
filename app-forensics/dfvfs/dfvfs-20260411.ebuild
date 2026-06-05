@@ -1,10 +1,10 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{11..14} )
 
 inherit distutils-r1
 
@@ -48,6 +48,7 @@ DEPEND="
 	>=app-forensics/libvsgpt-20211115[python]
 	>=app-forensics/libvshadow-20160109[python]
 	>=app-forensics/libvslvm-20160109[python]
+	>=dev-python/idna-2.5[${PYTHON_USEDEP}]
 	>=app-forensics/pytsk-20210419
 	>=dev-python/pyxattr-0.7.2[${PYTHON_USEDEP}]
 	${PYTHON_DEPS}
