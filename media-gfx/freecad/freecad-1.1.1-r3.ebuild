@@ -13,23 +13,9 @@ inherit check-reqs cmake cuda edo flag-o-matic optfeature python-single-r1 qmake
 
 DESCRIPTION="Qt based Computer Aided Design application"
 HOMEPAGE="https://www.freecad.org/ https://github.com/FreeCAD/FreeCAD"
-
-MY_PN=FreeCAD
-
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/${MY_PN}/${MY_PN}.git"
-	EGIT_SUBMODULES=( 'src/Mod/AddonManager' )
-	S="${WORKDIR}/freecad-${PV}"
-else
-	SRC_URI="
-	https://github.com/FreeCAD/FreeCAD/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/FreeCAD/AddonManager/archive/002addd5a520c4efb61f2e1dcc27e8815ce025e8.tar.gz \
-		-> FreeCAD-AddonManager-v2026.6.2.tar.gz
-	"
-	KEYWORDS="~amd64"
-	S="${WORKDIR}/FreeCAD-${PV}"
-fi
+SRC_URI="https://github.com/FreeCAD/FreeCAD/releases/download/${PV}/${PN}_source_${PV}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="~amd64"
+S="${WORKDIR}"
 
 # code is licensed LGPL-2
 # examples are licensed CC-BY-SA (without note of specific version)
@@ -137,7 +123,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-9999-Gentoo-specific-don-t-check-vcs.patch
 	"${FILESDIR}"/${PN}-9999-tests-src-Qt-only-build-test-for-BUILD_GUI-ON.patch
 	"${FILESDIR}/${PN}-1.0.0-r4-error-cannot-convert-bool-to-App-DocumentInitFlags.patch"
 	"${FILESDIR}/${PN}-1.0.2-pybind11-latent-slots-macro-conflicts-with-Qt.patch" # fixed in pybind-3.0.1
@@ -257,22 +242,6 @@ pkg_setup() {
 	python-single-r1_pkg_setup
 }
 
-src_unpack() {
-	default
-	cd "${WORKDIR}" || die
-
-	local addon_dir=$(find . -maxdepth 1 -type d -name "*AddonManager*" -not -name "${P}")
-
-	if [[ -n "${addon_dir}" ]]; then
-		# Remove the empty submodule placeholder in the FreeCAD source
-		rm -rf "${S}/src/Mod/AddonManager" || die
-		# Move the real Addon Manager source into place
-		mv "${addon_dir}" "${S}/src/Mod/AddonManager" || die
-	else
-		die "Could not find the unpacked Addon Manager directory in ${WORKDIR}"
-	fi
-}
-
 src_prepare() {
 	# deprecated in python-3.11 removed in python-3.13
 	sed -e '/import imghdr/d' -i src/Mod/CAM/CAMTests/TestCAMSanity.py || die
@@ -390,23 +359,12 @@ src_configure() {
 		# Use the version of pyside[tools] that matches the selected python version
 		-DPYTHON_CONFIG_SUFFIX="-${EPYTHON}"
 		# -DPython3_EXECUTABLE=${EPYTHON}
+
+		-DENABLE_DEVELOPER_TESTS=OFF
+
+		-DPACKAGE_WCREF="${PVR} (gentoo)"
+		-DPACKAGE_WCURL="git://github.com/FreeCAD/FreeCAD.git ${PV}"
 	)
-
-	if [[ ${PV} == *9999* ]]; then
-		mycmakeargs+=(
-			-DENABLE_DEVELOPER_TESTS="$(usex test)"
-
-			-DPACKAGE_WCREF="%{release} (Git)"
-			-DPACKAGE_WCURL="git://github.com/FreeCAD/FreeCAD.git main"
-		)
-	else
-		mycmakeargs+=(
-			-DENABLE_DEVELOPER_TESTS=OFF
-
-			-DPACKAGE_WCREF="${PVR} (gentoo)"
-			-DPACKAGE_WCURL="git://github.com/FreeCAD/FreeCAD.git ${PV}"
-		)
-	fi
 
 	if use debug; then
 		# BUILD_SANDBOX currently broken, see
@@ -534,15 +492,6 @@ src_test() {
 		fi
 
 		run="virtx"
-	fi
-
-	if [[ ${PV} == *9999* ]]; then
-		if ! nonfatal \
-			"${run}" \
-			cmake_src_test; then
-			eerror "cmake failed $?"
-			failed+=( "cmake" )
-		fi
 	fi
 
 	if [[ "${#failed[@]}" -gt 0 ]]; then
