@@ -6,14 +6,12 @@ inherit qmake-utils
 
 DESCRIPTION="Software used to analyze data from CPAP machines"
 HOMEPAGE="https://www.sleepfiles.com/OSCAR/"
-SRC_URI="https://gitlab.com/CrimsonNape/OSCAR-code/-/archive/v${PV}/OSCAR-code-v${PV}.tar.gz"
+SRC_URI="https://gitlab.com/CrimsonNape/OSCAR-code/-/archive/v${PV}/OSCAR-code-v${PV}.tar.bz2"
+S="${WORKDIR}/OSCAR-code-v${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
-
 KEYWORDS="~amd64"
-
-IUSE="debug"
 
 DEPEND="
 	virtual/opengl
@@ -23,10 +21,8 @@ DEPEND="
 	dev-qt/qttools:6
 	virtual/glu
 	virtual/libudev
-	sys-libs/zlib"
+	virtual/zlib"
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/OSCAR-code-v${PV}"
 
 src_prepare() {
 	default
