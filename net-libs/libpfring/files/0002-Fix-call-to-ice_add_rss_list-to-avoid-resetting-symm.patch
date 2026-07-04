@@ -1,0 +1,29 @@
+From 0a77328e48caa3177ad90feeff60c4c1c26c48f8 Mon Sep 17 00:00:00 2001
+From: Alfredo Cardigliano <cardigliano@ntop.org>
+Date: Thu, 15 Jan 2026 12:22:49 +0100
+Subject: [PATCH 2/9] Fix call to ice_add_rss_list to avoid resetting symmetric
+ rss on reload
+
+---
+ drivers/intel/ice/ice-2.3.10-zc/src/ice_flow.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/intel/ice/ice-2.3.10-zc/src/ice_flow.c b/drivers/intel/ice/ice-2.3.10-zc/src/ice_flow.c
+index fb1859e9..523565fa 100644
+--- a/drivers/intel/ice/ice-2.3.10-zc/src/ice_flow.c
++++ b/drivers/intel/ice/ice-2.3.10-zc/src/ice_flow.c
+@@ -4303,6 +4303,11 @@ ice_add_rss_cfg_sync(struct ice_hw *hw, u16 vsi_handle,
+ 		goto exit;
+ 	}
+ 
++#ifdef HAVE_PF_RING
++	/* Set symm before calling ice_add_rss_list (used on restore in ice_replay_rss_cfg) */
++	prof->cfg.symm = cfg->symm;
++#endif
++
+ 	status = ice_add_rss_list(hw, vsi_handle, prof);
+ 
+ 	prof->cfg.symm = cfg->symm;
+-- 
+2.54.0
+

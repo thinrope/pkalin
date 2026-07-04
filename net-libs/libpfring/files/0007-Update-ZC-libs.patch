@@ -1,0 +1,63 @@
+From ba7aa8ae93ca5fc0cf92585388d0f00001a79f67 Mon Sep 17 00:00:00 2001
+From: Alfredo Cardigliano <cardigliano@ntop.org>
+Date: Thu, 29 Jan 2026 11:13:51 +0100
+Subject: [PATCH 7/9] Update ZC libs
+
+---
+ userland/lib/libs/libpfring_zc_x86_64.a       | Bin 293138 -> 293138 bytes
+ userland/lib/libs/libpfring_zc_x86_64.so      | Bin 224360 -> 224360 bytes
+ .../lib/libs/libpfring_zc_x86_64_core-avx2.a  | Bin 296514 -> 296514 bytes
+ .../lib/libs/libpfring_zc_x86_64_corei7-avx.a | Bin 295018 -> 295018 bytes
+ .../lib/libs/libpfring_zc_x86_64_corei7.a     | Bin 293882 -> 293882 bytes
+ 5 files changed, 0 insertions(+), 0 deletions(-)
+
+diff --git a/userland/lib/libs/libpfring_zc_x86_64.a b/userland/lib/libs/libpfring_zc_x86_64.a
+index 120ccc5eb1f7f933a25547e6162acd0aa03d585e..821c876cbc04c4278698e1298ede352249727354 100644
+GIT binary patch
+delta 43
+ucmbRANpR99!G<l2-I=Ur28KqK?GrK?w@=7qs+t1j^Z#So&i{{@xf%d#Y7c$@
+
+delta 43
+ucmbRANpR99!G<l2-I=VWhK7db?GrK?w@=7qs+t1j^Z#So&i{{@xf%d!^bdFd
+
+diff --git a/userland/lib/libs/libpfring_zc_x86_64.so b/userland/lib/libs/libpfring_zc_x86_64.so
+index d65fbcd68ce6a9e81d2d5c032e5c5ec96b6d1735..24c69a2d33fe58ad7d5007b5972fdc7448f735e8 100755
+GIT binary patch
+delta 55
+zcmV-70LcI7*bV5|4Y1e(6x(@z3Wj%2;?BqJl9(_<*vcF-AcO1zhwK6Yx9kD}OLGM_
+NFflSYw>)+NEcW{v7*hZM
+
+delta 55
+zcmV-70LcI7*bV5|4Y1e(6rTZJlyf_HI1Vg8k*44oKQ7Pyn}h5EhwK6Yx9kD}OLGM^
+NF)=YWw>)+NEcU4H7KH!+
+
+diff --git a/userland/lib/libs/libpfring_zc_x86_64_core-avx2.a b/userland/lib/libs/libpfring_zc_x86_64_core-avx2.a
+index 1088d897d3c572c39c5b461d0abe9094d1926b91..6d69e566f402ca88555e0a783fd41f61d271e275 100644
+GIT binary patch
+delta 43
+tcmX@qBXp=os9_6Zb{?ylfuWIQdqE!K_JTa7rrA*bcTVQ*-#J;lYXDVR4+8)I
+
+delta 43
+tcmX@qBXp=os9_6Zb{?y#p`oF9dqE!K_JTa7rrA*bcTVQ*-#J;lYXDT_4*dWC
+
+diff --git a/userland/lib/libs/libpfring_zc_x86_64_corei7-avx.a b/userland/lib/libs/libpfring_zc_x86_64_corei7-avx.a
+index c4538e04d9a2f20a8c3db2ac0a30bb39221b46bf..5bd04d9b896b092e0a95bb42e2ea6653fb240dba 100644
+GIT binary patch
+delta 43
+ucmaFWAoQw1s9_7^;!IXE14ARr_7$0o+gD^VRn3C()mfOgtFy2;*8l)wI1U*A
+
+delta 43
+ucmaFWAoQw1s9_7^;!IXkLqkLJ_7$0o+gD^VRn3C()mfOgtFy2;*8l)v!VVJv
+
+diff --git a/userland/lib/libs/libpfring_zc_x86_64_corei7.a b/userland/lib/libs/libpfring_zc_x86_64_corei7.a
+index 9c148b67407b0431ea3357dd30d40b78e0162722..27ccb58fef71730caa700b508b36c6b1e62feeea 100644
+GIT binary patch
+delta 43
+ucmezMUGUd;!G<l2n=@I>3=EAd+jnF#Zr_o~<TVw_XaCQ%o&7)a=NbT+Wf6n`
+
+delta 43
+ucmezMUGUd;!G<l2n=@HW4Gj&=+jnF#Zr_o~<TVw_XaCQ%o&7)a=NbT*?-70g
+
+-- 
+2.54.0
+

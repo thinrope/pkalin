@@ -1,0 +1,55 @@
+From 687f1bd8054404f342c228d855727c8f3a2d9dc3 Mon Sep 17 00:00:00 2001
+From: Alfredo Cardigliano <cardigliano@ntop.org>
+Date: Tue, 13 Jan 2026 10:12:40 +0100
+Subject: [PATCH 1/9] Fix symm rss conf in ice driver
+
+---
+ drivers/intel/ice/ice-2.3.10-zc/src/ice_lib.c | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/drivers/intel/ice/ice-2.3.10-zc/src/ice_lib.c b/drivers/intel/ice/ice-2.3.10-zc/src/ice_lib.c
+index 7ad4f030..8ff8544d 100644
+--- a/drivers/intel/ice/ice-2.3.10-zc/src/ice_lib.c
++++ b/drivers/intel/ice/ice-2.3.10-zc/src/ice_lib.c
+@@ -2213,6 +2213,30 @@ static void ice_vsi_set_vf_rss_flow_fld(struct ice_vsi *vsi)
+ }
+ 
+ static const struct ice_rss_hash_cfg default_rss_cfgs[] = {
++#ifdef HAVE_PF_RING
++	/* configure RSS for IPv4 with input set IP src/dst */
++	{ICE_FLOW_SEG_HDR_IPV4, ICE_FLOW_HASH_IPV4, ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for IPv6 with input set IPv6 src/dst */
++	{ICE_FLOW_SEG_HDR_IPV6, ICE_FLOW_HASH_IPV6, ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for tcp4 with input set IP src/dst, TCP src/dst */
++	{ICE_FLOW_SEG_HDR_TCP | ICE_FLOW_SEG_HDR_IPV4,
++				ICE_HASH_TCP_IPV4,  ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for udp4 with input set IP src/dst, UDP src/dst */
++	{ICE_FLOW_SEG_HDR_UDP | ICE_FLOW_SEG_HDR_IPV4,
++				ICE_HASH_UDP_IPV4,  ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for sctp4 with input set IP src/dst */
++	{ICE_FLOW_SEG_HDR_SCTP | ICE_FLOW_SEG_HDR_IPV4,
++				ICE_HASH_SCTP_IPV4, ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for tcp6 with input set IPv6 src/dst, TCP src/dst */
++	{ICE_FLOW_SEG_HDR_TCP | ICE_FLOW_SEG_HDR_IPV6,
++				ICE_HASH_TCP_IPV6,  ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for udp6 with input set IPv6 src/dst, UDP src/dst */
++	{ICE_FLOW_SEG_HDR_UDP | ICE_FLOW_SEG_HDR_IPV6,
++				ICE_HASH_UDP_IPV6,  ICE_RSS_ANY_HEADERS, true},
++	/* configure RSS for sctp6 with input set IPv6 src/dst */
++	{ICE_FLOW_SEG_HDR_SCTP | ICE_FLOW_SEG_HDR_IPV6,
++				ICE_HASH_SCTP_IPV6, ICE_RSS_ANY_HEADERS, true},
++#else /* HAVE_PF_RING */
+ 	/* configure RSS for IPv4 with input set IP src/dst */
+ 	{ICE_FLOW_SEG_HDR_IPV4, ICE_FLOW_HASH_IPV4, ICE_RSS_ANY_HEADERS, false},
+ 	/* configure RSS for IPv6 with input set IPv6 src/dst */
+@@ -2242,6 +2266,7 @@ static const struct ice_rss_hash_cfg default_rss_cfgs[] = {
+ 	/* configure RSS for IPSEC ESP SPI with input set MAC_IPV4_SPI */
+ 	{ICE_FLOW_SEG_HDR_ESP,
+ 		ICE_FLOW_HASH_ESP_SPI, ICE_RSS_OUTER_HEADERS, false },
++#endif /* HAVE_PF_RING */
+ };
+ 
+ /**
+-- 
+2.54.0
+

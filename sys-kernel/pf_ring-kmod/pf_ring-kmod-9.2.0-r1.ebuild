@@ -16,7 +16,6 @@ S="${WORKDIR}/${PN}/kernel"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="${DEPEND}"

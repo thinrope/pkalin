@@ -16,7 +16,6 @@ S="${WORKDIR}/${PN}/userland"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
 
 DEPEND="sys-kernel/linux-headers
 	sys-process/numactl"
