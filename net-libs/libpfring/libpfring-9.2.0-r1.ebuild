@@ -1,4 +1,4 @@
-# Copyright 2018-2025 Gentoo Authors
+# Copyright 2018-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,13 +12,11 @@ EGIT_BRANCH="${PV}-stable"
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (libpfring)"
 HOMEPAGE="https://www.ntop.org/products/packet-capture/pf_ring/"
+S="${WORKDIR}/${PN}/userland"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
-
-S="${WORKDIR}/${PN}/userland"
 
 DEPEND="sys-kernel/linux-headers
 	sys-process/numactl"
