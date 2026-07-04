@@ -12,14 +12,13 @@ EGIT_BRANCH="master"
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (kernel modules for)"
 HOMEPAGE="https://www.ntop.org/products/packet-capture/pf_ring/"
+S="${WORKDIR}/${PN}/kernel"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/${PN}/kernel"
 
 CONFIG_CHECK="NET"
 ERROR_NET="PF_RING requires CONFIG_NET=y set in the kernel."
