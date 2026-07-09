@@ -3,32 +3,28 @@
 
 EAPI=8
 
-inherit linux-mod-r1 git-r3
+inherit linux-mod-r1
 
-FORK="ntop"
-EGIT_REPO_URI="https://github.com/${FORK}/PF_RING.git"
-EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}"
-EGIT_BRANCH="master"
+MY_PN="PF_RING"	# upstream calls it this way
+MY_P="${MY_PN}-${PV}"
+COMMIT_HASH="53d901fbf55e8a1df156a4511a992703c141411c" # HEAD of 9.2.0-stable, last commit 2026-04-30
 
 DESCRIPTION="PF_RING: High-speed packet processing framework (kernel modules for)"
 HOMEPAGE="https://www.ntop.org/products/packet-capture/pf_ring/"
-S="${WORKDIR}/${PN}/kernel"
+SRC_URI="https://github.com/ntop/${MY_PN}/archive/${COMMIT_HASH}.tar.gz -> ${MY_P}.tar.gz"
+S="${WORKDIR}/${MY_PN}-${COMMIT_HASH}/kernel"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
+KEYWORDS="~amd64"
 
 DEPEND="virtual/linux-sources"
-RDEPEND="${DEPEND}"
 
 CONFIG_CHECK="NET"
-ERROR_NET="PF_RING requires CONFIG_NET=y set in the kernel."
+ERROR_NET="${MY_PN} requires CONFIG_NET=y set in the kernel."
 
 pkg_setup() {
 	linux-mod-r1_pkg_setup
-}
-
-src_unpack() {
-	git-r3_src_unpack
 }
 
 src_compile() {
@@ -41,8 +37,4 @@ src_install() {
 	linux-mod-r1_src_install
 	insinto /usr/include/linux
 	doins linux/pf_ring.h || die
-}
-
-pkg_postinst() {
-	linux-mod-r1_pkg_postinst
 }
