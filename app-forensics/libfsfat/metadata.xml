@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person" proxied="yes">
+    <name>Kalin KOZHUHAROV</name>
+    <email>kalin@thinrope.net</email>
+  </maintainer>
+  <upstream>
+    <remote-id type="github">libyal/libfsfat</remote-id>
+  </upstream>
+  <use>
+    <flag name="fuse">Enable FUSE support</flag>
+  </use>
+</pkgmetadata>
