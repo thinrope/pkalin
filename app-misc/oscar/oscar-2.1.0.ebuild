@@ -35,6 +35,6 @@ src_install() {
 	dobin OSCAR20 || die
 	dodoc ../README || die
 	dodoc docs/* || die
-	insinto /usr/share/OSCAR/Html/
+	insinto /usr/share/OSCAR20/Html/
 	doins docs/{about,credits,release_notes}.html
 }
