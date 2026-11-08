@@ -12,12 +12,11 @@ SRC_URI="https://github.com/gamelinux/${PN}/archive/refs/tags/v${PV}.tar.gz -> $
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="pfring json"
+IUSE="pfring"
 
 DEPEND=">=net-libs/ldns-1.7.1-r5
 		>=net-libs/libpcap-1.10.0-r1
-		pfring? ( net-libs/libpfring )
-		json? ( dev-libs/jansson )"
+		pfring? ( net-libs/libpfring )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
@@ -26,11 +25,9 @@ src_prepare() {
 }
 
 src_configure() {
-	local myeconfargs=(
-		$(use_enable pfring pfring) \
-		$(use_enable json json)
-	)
-	econf ${myeconfargs[@]}
+	# dev-libs/jansson is not needed, will be dropped soon
+	# REF: https://github.com/gamelinux/passivedns/issues/142#issuecomment-6724158831
+	econf --disable-json $(use_enable pfring pfring)
 }
 
 src_compile() {

@@ -9,8 +9,6 @@
     <remote-id type="github">gamelinux/passivedns</remote-id>
   </upstream>
   <use>
-	  
-    <flag name="json">Enable JSON support via <pkg>dev-libs/jansson</pkg></flag>
     <flag name="pfring">Enable PF_RING support via <pkg>net-libs/libpfring</pkg></flag>
   </use>
 </pkgmetadata>
