@@ -22,13 +22,9 @@ DEPEND="virtual/linux-sources"
 CONFIG_CHECK="NET"
 ERROR_NET="${MY_PN} requires CONFIG_NET=y set in the kernel."
 
-pkg_setup() {
-	linux-mod-r1_pkg_setup
-}
-
 src_compile() {
-	local modargs=( M="${S}" EXTRA_CFLAGS="-I${S}" BUILD_KERNEL="${KV_FULL}" )
 	local modlist=( pf_ring=net/pf_ring:"${S}":"${S}" )
+	local modargs=( M="${S}" EXTRA_CFLAGS="-I${S}" BUILD_KERNEL="${KV_FULL}" )
 	linux-mod-r1_src_compile
 }
 
